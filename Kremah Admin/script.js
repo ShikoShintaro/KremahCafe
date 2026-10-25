@@ -428,7 +428,8 @@ function renderPublicView() {
     document.getElementById('pubPhone').textContent = kremahData.store.phone;
     document.getElementById('pubEmail').textContent = kremahData.store.email;
     document.getElementById('pubAddress').textContent = kremahData.store.address;
-    document.getElementById('pubMapsLink').href = kremahData.store.mapsUrl;
+    const mapsUrl = String(kremahData.store.mapsUrl || '');
+    try { const parsedMapsUrl = new URL(mapsUrl, window.location.origin); if (['https:', 'http:'].includes(parsedMapsUrl.protocol)) document.getElementById('pubMapsLink').href = parsedMapsUrl.href; } catch (error) { console.warn('Ignoring invalid maps URL.'); }
 
     /* Stats */
     document.getElementById('statCatCount').textContent = kremahData.categories.length;
@@ -441,8 +442,8 @@ function renderPublicView() {
           All
         </button>
       ` + kremahData.categories.map(c => `
-        <button onclick="setPubCategory('${c.key}')" class="px-4 py-1.5 rounded-full text-xs font-semibold transition ${activePubCategory === c.key ? 'bg-gold text-brown shadow' : 'bg-white/80 text-brown border border-brown3/20 hover:bg-gold/10'}">
-          ${c.name}
+        <button onclick="setPubCategory('${escapeAdminHtml(c.key)}')" class="px-4 py-1.5 rounded-full text-xs font-semibold transition ${activePubCategory === c.key ? 'bg-gold text-brown shadow' : 'bg-white/80 text-brown border border-brown3/20 hover:bg-gold/10'}">
+          ${escapeAdminHtml(c.name)}
         </button>
       `).join('');
 
@@ -518,17 +519,17 @@ function renderPublicMenuItems() {
                     <div>
                       <div class="flex items-start justify-between mb-3">
                         <div class="w-12 h-12 rounded-xl bg-cream/50 flex items-center justify-center text-3xl group-hover:scale-110 transition">
-                          ${item.emoji}
+                          ${escapeAdminHtml(item.emoji || "")}
                         </div>
-                        ${item.badge ? `<span class="text-[10px] font-bold uppercase tracking-wider bg-gold/10 text-gold border border-gold/30 px-2.5 py-0.5 rounded-full">${item.badge}</span>` : ''}
+                        ${item.badge ? `<span class="text-[10px] font-bold uppercase tracking-wider bg-gold/10 text-gold border border-gold/30 px-2.5 py-0.5 rounded-full">${escapeAdminHtml(item.badge)}</span>` : ''}
                       </div>
 
-                      <h4 class="font-serif text-lg font-bold text-brown group-hover:text-gold transition">${item.name}</h4>
-                      <p class="text-xs text-brown3/80 font-light mt-1 line-clamp-2 leading-relaxed">${item.desc}</p>
+                      <h4 class="font-serif text-lg font-bold text-brown group-hover:text-gold transition">${escapeAdminHtml(item.name)}</h4>
+                      <p class="text-xs text-brown3/80 font-light mt-1 line-clamp-2 leading-relaxed">${escapeAdminHtml(item.desc)}</p>
                     </div>
 
                     <div class="flex items-center justify-between pt-4 mt-4 border-t border-brown3/10">
-                      <span class="font-serif text-xl font-bold text-gold">${item.price}</span>
+                      <span class="font-serif text-xl font-bold text-gold">${escapeAdminHtml(item.price)}</span>
                       <span class="text-xs text-brown font-semibold group-hover:translate-x-1 transition flex items-center gap-1">View →</span>
                     </div>
                   </div>
@@ -599,7 +600,7 @@ function renderAdminOverview() {
         const count = kremahData.items.filter(i => i.category === c.key).length;
         return `
           <div class="flex items-center justify-between text-xs">
-            <span class="text-brown font-medium">${c.name}</span>
+            <span class="text-brown font-medium">${escapeAdminHtml(c.name)}</span>
             <span class="font-mono bg-cream px-2 py-0.5 rounded text-brown3 font-bold">${count} items</span>
           </div>
         `;
@@ -634,20 +635,20 @@ function renderAdminMenuTable() {
         return `
           <tr class="hover:bg-cream/20 transition border-b border-brown3/5">
             <td class="py-3 px-4 flex items-center gap-3">
-              <span class="w-8 h-8 rounded-lg bg-cream/60 flex items-center justify-center text-lg">${item.emoji}</span>
+              <span class="w-8 h-8 rounded-lg bg-cream/60 flex items-center justify-center text-lg">${escapeAdminHtml(item.emoji || "")}</span>
               <div>
-                <strong class="text-brown block font-semibold">${item.name}</strong>
-                <span class="text-[11px] text-brown3 line-clamp-1 max-w-xs font-light">${item.desc}</span>
+                <strong class="text-brown block font-semibold">${escapeAdminHtml(item.name)}</strong>
+                <span class="text-[11px] text-brown3 line-clamp-1 max-w-xs font-light">${escapeAdminHtml(item.desc)}</span>
               </div>
             </td>
             <td class="py-3 px-4 font-medium text-brown2">
-              ${catObj ? catObj.name : item.category}
+              ${escapeAdminHtml(catObj ? catObj.name : item.category)}
             </td>
             <td class="py-3 px-4 font-bold text-gold font-serif text-sm">
-              ${item.price}
+              ${escapeAdminHtml(item.price)}
             </td>
             <td class="py-3 px-4">
-              ${item.badge ? `<span class="bg-gold/10 text-gold border border-gold/30 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">${item.badge}</span>` : '<span class="text-brown3/40">—</span>'}
+              ${item.badge ? `<span class="bg-gold/10 text-gold border border-gold/30 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">${escapeAdminHtml(item.badge)}</span>` : '<span class="text-brown3/40">—</span>'}
             </td>
             <td class="py-3 px-4 text-right space-x-2">
               <button onclick="openEditItemModal('${item.id}')" class="px-2.5 py-1 rounded-lg bg-brown text-gold text-[11px] font-semibold hover:bg-brown2 transition">Edit</button>
@@ -664,11 +665,11 @@ function populateCategorySelects() {
 
     if (catFilter) {
         catFilter.innerHTML = '<option value="ALL">All Categories</option>' +
-            kremahData.categories.map(c => `<option value="${c.key}">${c.name}</option>`).join('');
+            kremahData.categories.map(c => `<option value="${escapeAdminHtml(c.key)}">${escapeAdminHtml(c.name)}</option>`).join('');
     }
 
     if (modalCat) {
-        modalCat.innerHTML = kremahData.categories.map(c => `<option value="${c.key}">${c.name}</option>`).join('');
+        modalCat.innerHTML = kremahData.categories.map(c => `<option value="${escapeAdminHtml(c.key)}">${escapeAdminHtml(c.name)}</option>`).join('');
     }
 }
 
@@ -760,10 +761,10 @@ function renderAdminCategoryList() {
         return `
           <div class="flex items-center justify-between p-3.5 bg-cream/20 rounded-xl border border-brown3/10">
             <div>
-              <strong class="text-brown block text-sm">${c.name}</strong>
-              <span class="text-[10px] text-brown3 font-mono">Key: ${c.key} • ${count} items</span>
+              <strong class="text-brown block text-sm">${escapeAdminHtml(c.name)}</strong>
+              <span class="text-[10px] text-brown3 font-mono">Key: ${escapeAdminHtml(c.key)} • ${count} items</span>
             </div>
-            <button onclick="deleteCategory('${c.key}')" class="px-2.5 py-1 bg-rose-100 text-rose-700 hover:bg-rose-200 text-xs font-semibold rounded-lg transition">
+            <button onclick="deleteCategory('${escapeAdminHtml(c.key)}')" class="px-2.5 py-1 bg-rose-100 text-rose-700 hover:bg-rose-200 text-xs font-semibold rounded-lg transition">
               Delete
             </button>
           </div>

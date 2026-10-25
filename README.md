@@ -1,15 +1,33 @@
-# Kremah Café website
+# Kremah Café — Standalone Edition
 
-## Start the website and API
+Kremah Café runs locally on Windows without XAMPP, Apache, PHP, MySQL, or phpMyAdmin. It uses a small local SQLite database created automatically in `data/kremah.sqlite`.
 
-1. Install Node.js and MySQL.
-2. Create the database and tables by running `schema.sql` in MySQL.
-3. Copy `.env.example` to `.env`, then fill in the database credentials, a unique `SESSION_SECRET`, and the admin email and password. Use a random session secret and a strong admin password; do not publish `.env`.
-4. Run `npm install`, then `npm start` from this folder.
-5. Open `http://localhost:3000` for the storefront or `http://localhost:3000/Kremah%20Admin/` for the admin portal.
+## Requirements
 
-The browser pages use the same-origin API, so they must be opened through the running server, not directly as `file://` pages. Customer orders and CMS data are stored in MySQL. Admin sessions are stored in MySQL and use an HTTP-only cookie. In production, serve over HTTPS and set `NODE_ENV=production`.
+- Windows 10/11
+- Node.js **22.13 or newer** (includes the built-in SQLite module)
+- Internet connection for the first dependency installation and for the external fonts/Tailwind CDN used by the current design
 
-On the first successful admin sign-in, the existing menu and website settings are copied into the database if it does not already contain CMS data. Customer checkout records a name, phone, delivery address/notes, optional email, and the items ordered.
+## Start the app
 
-The admin **Orders** page shows customer contact details and order items and lets you update order status. **Data Backup & Reset** downloads an Excel workbook containing orders and order items; the reset action restores the default CMS menu/settings and does not delete order history.
+1. Install Node.js 22.13+ from https://nodejs.org/ if it is not already installed.
+2. Extract the entire ZIP to a writable folder (for example, `C:\KremahCafe`).
+3. Double-click `start.bat` and wait for the server to start.
+4. Open `http://localhost:3000` for the storefront.
+5. Open `http://localhost:3000/Kremah%20Admin/` for the admin portal.
+
+The first run installs Node dependencies. The app creates `data/` automatically and writes first-run administrator credentials to `data/first-run-admin.txt`. Sign in with those credentials, then keep them somewhere private and delete that text file. Do not share the `data` folder; it contains the database and application secrets.
+
+## Data and backups
+
+- Menu/CMS settings and customer orders are stored locally in `data/kremah.sqlite`.
+- Admin sessions are stored in memory and are cleared when the server stops.
+- The admin **Data Backup & Reset** export creates an Excel workbook of orders and order items. The reset action restores default CMS data and does not delete order history.
+- To back up all app data, stop the server and copy the entire `data` folder to a secure location.
+- To move the app to another PC, copy the project folder and its `data` folder, install Node.js 22.13+, then run `start.bat`.
+
+## Troubleshooting
+
+- If port 3000 is already in use, start from Command Prompt with `set PORT=3001` then `npm start`, and visit `http://localhost:3001`.
+- Keep the server window open while using the app. Press Ctrl+C in that window to stop it.
+- This is a local single-computer app and binds to `127.0.0.1`; it is not configured for public internet hosting.

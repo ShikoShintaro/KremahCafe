@@ -304,7 +304,8 @@ function applyCmsData(data) {
     document.getElementById('storePhone').textContent = data.store.phone || '';
     document.getElementById('storeEmail').textContent = data.store.email || '';
     if (data.store.mapsUrl) {
-      document.getElementById('storeMapsLink').href = data.store.mapsUrl;
+      var mapsUrl = String(data.store.mapsUrl || '');
+      try { var parsedMapsUrl = new URL(mapsUrl, window.location.origin); if (['https:', 'http:'].includes(parsedMapsUrl.protocol)) document.getElementById('storeMapsLink').href = parsedMapsUrl.href; } catch (error) { console.warn('Ignoring invalid maps URL.'); }
     }
   }
 }
@@ -436,7 +437,8 @@ document.addEventListener('keydown', function(e) {
 
 function addCurrentItemToCart() {
   if (!currentModalItem) return;
-  var numericPrice = parseInt(currentModalItem.price.replace(/[^0-9]/g, ''));
+  var numericPrice = Number(currentModalItem.price.replace(/[^0-9.]/g, ''));
+  if (!Number.isFinite(numericPrice) || numericPrice <= 0) { showToast('This item has an invalid price. Please contact the cafe.'); return; }
   
   var existing = cart.find(item => item.name === currentModalItem.name);
   if (existing) {
@@ -587,7 +589,10 @@ function sendChatMessage() {
   if (!text) return;
 
   var msgArea = document.getElementById('chatMessages');
-  msgArea.innerHTML += '<div style="background:var(--gold); color:var(--brown); padding:8px 12px; border-radius:8px; align-self:flex-end; max-width:85%;">'+ input.value + '</div>';
+  var userBubble = document.createElement('div');
+  userBubble.style.cssText = 'background:var(--gold); color:var(--brown); padding:8px 12px; border-radius:8px; align-self:flex-end; max-width:85%; white-space:pre-wrap; overflow-wrap:anywhere;';
+  userBubble.textContent = input.value;
+  msgArea.appendChild(userBubble);
   
   var reply = "I'm not quite sure about that! Try asking about 'coffee', 'matcha', 'hours', 'location', or 'croffles'.";
 
@@ -604,7 +609,10 @@ function sendChatMessage() {
   }
 
   setTimeout(function() {
-    msgArea.innerHTML += '<div style="background:var(--white); padding:8px 12px; border-radius:8px; align-self:flex-start; max-width:85%;">'+ reply + '</div>';
+    var replyBubble = document.createElement('div');
+    replyBubble.style.cssText = 'background:var(--white); padding:8px 12px; border-radius:8px; align-self:flex-start; max-width:85%;';
+    replyBubble.innerHTML = reply; // Fixed, application-authored reply templates only.
+    msgArea.appendChild(replyBubble);
     msgArea.scrollTop = msgArea.scrollHeight;
   }, 300);
 
