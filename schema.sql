@@ -1,0 +1,29 @@
+CREATE DATABASE IF NOT EXISTS kremah_db;
+USE kremah_db;
+
+CREATE TABLE IF NOT EXISTS site_config (
+  id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
+  data JSON NOT NULL,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_name VARCHAR(100) NOT NULL,
+  customer_email VARCHAR(254) NULL,
+  phone VARCHAR(30) NOT NULL,
+  address TEXT NOT NULL,
+  total_price DECIMAL(10,2) NOT NULL,
+  status ENUM('pending','accepted','preparing','ready','completed','cancelled') NOT NULL DEFAULT 'pending',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_orders_created_at (created_at)
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  order_id INT UNSIGNED NOT NULL,
+  item_name VARCHAR(150) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  quantity INT UNSIGNED NOT NULL,
+  CONSTRAINT fk_order_items_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
