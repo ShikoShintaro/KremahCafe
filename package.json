@@ -4,7 +4,11 @@
   "private": true,
   "description": "Standalone Kremah Cafe storefront and admin app using local SQLite; no XAMPP or MySQL required.",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node scripts/dev.js",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "start:legacy": "node server.js"
   },
   "engines": {
     "node": ">=22.13.0"
