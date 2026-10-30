@@ -9,11 +9,12 @@ const cookie = require("cookie");
 
 const app = express();
 
+app.set("trust proxy", 1);
 app.disable("x-powered-by");
 app.use(helmet());
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+  origin: process.env.CORS_ORIGIN || "https://kremah-cafe.vercel.app/",
   credentials: true,
 }));
 
@@ -44,6 +45,7 @@ app.use("/api/v1/auth", require("./routes/auth"));
 app.use("/api/v1/admin", require("./routes/admin"));
 app.use("/api/v1/admin/catalog", require("./routes/admin-catalog"));
 app.use("/api/v1", require("./routes/catalog"));
+app.use("/api/v1/customer-auth", require("./routes/customer-auth"));
 
 app.use((req, res) => {
   res.status(404).json({
