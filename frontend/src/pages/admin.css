@@ -1,0 +1,1174 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+
+/* Kremah Café admin — isolated from the customer storefront. */
+.kremah-admin {
+    --ka-ink: #25160f;
+    --ka-brown: #25160f;
+    --ka-brown-2: #3d261d;
+    --ka-gold: #d4af37;
+    --ka-gold-dark: #a77b1f;
+    --ka-gold-soft: #f4e8c1;
+    --ka-cream: #fdfbf7;
+    --ka-cream-2: #f5eddf;
+    --ka-paper: #fffefa;
+    --ka-muted: #88796b;
+    --ka-border: #e9dfd1;
+    isolation: isolate;
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: clip;
+    background: var(--ka-cream);
+    color: var(--ka-ink);
+    font: 14px/1.5 'DM Sans', sans-serif;
+    text-align: left;
+    color-scheme: light;
+}
+
+.kremah-admin,
+.kremah-admin *,
+.kremah-admin *::before,
+.kremah-admin *::after {
+    box-sizing: border-box;
+}
+
+.kremah-admin button,
+.kremah-admin input,
+.kremah-admin select,
+.kremah-admin textarea {
+    font: inherit;
+}
+
+.kremah-admin button {
+    text-transform: none;
+    letter-spacing: normal;
+    cursor: pointer;
+}
+
+.kremah-admin h1,
+.kremah-admin h2,
+.kremah-admin h3,
+.kremah-admin p {
+    text-transform: none;
+}
+
+.kremah-admin::before,
+.kremah-admin::after,
+.kremah-admin .kremah-admin-main::before,
+.kremah-admin .kremah-admin-main::after,
+.kremah-admin .kremah-admin-content::before,
+.kremah-admin .kremah-admin-content::after {
+    content: none !important;
+    display: none !important;
+}
+
+.kremah-admin .kremah-admin-sidebar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex: 0 0 258px;
+    flex-direction: column;
+    width: 258px;
+    min-width: 258px;
+    min-height: 100vh;
+    height: 100vh;
+    padding: 25px 17px 16px;
+    overflow-y: auto;
+    background: linear-gradient(165deg, #25160f, #3d261d 75%, #1d100b);
+    color: #fdf8ef;
+}
+
+.kremah-admin .kremah-admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 8px 27px;
+    border-bottom: 1px solid #d4af3738;
+}
+
+.kremah-admin .kremah-admin-mark {
+    display: grid;
+    flex: 0 0 39px;
+    width: 39px;
+    height: 39px;
+    place-items: center;
+    border-radius: 13px;
+    background: linear-gradient(145deg, #f0d98d, #bd922b);
+    color: #25160f;
+    font: 700 24px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-brand b {
+    color: #fdf8ef;
+    font: 600 18px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-brand i {
+    color: #fdf8ef;
+    font-weight: 400;
+}
+
+.kremah-admin .kremah-admin-brand small {
+    display: block;
+    margin-top: 3px;
+    color: #d4af37;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.kremah-admin .kremah-admin-workspace {
+    margin: 20px 2px 27px;
+    padding: 11px 12px;
+    border: 1px solid #d4af3738;
+    border-radius: 10px;
+    background: #ffffff08;
+    color: #e9dcc9;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-workspace i,
+.kremah-admin .kremah-admin-topbar section label i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #79b98d;
+}
+
+.kremah-admin .kremah-admin-workspace span {
+    float: right;
+    color: #c7ad82;
+}
+
+.kremah-admin .kremah-admin-nav-label {
+    padding: 0 11px 10px;
+    color: #a58c70;
+    font-size: 9px;
+    letter-spacing: 1.7px;
+}
+
+.kremah-admin .kremah-admin-nav {
+    display: grid;
+    gap: 5px;
+}
+
+.kremah-admin .kremah-admin-nav button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 11px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #d2c4b2;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background .2s, color .2s;
+}
+
+.kremah-admin .kremah-admin-nav button:hover {
+    background: #ffffff12;
+    color: #fff;
+}
+
+.kremah-admin .kremah-admin-nav button.active {
+    background: linear-gradient(100deg, #d4af37, #ead28a);
+    color: #25160f;
+    font-weight: 700;
+    box-shadow: 0 6px 18px #d4af3725;
+}
+
+.kremah-admin .kremah-admin-nav button>span {
+    display: inline-grid;
+    flex: 0 0 18px;
+    width: 18px;
+    place-items: center;
+    font-size: 16px;
+}
+
+.kremah-admin .kremah-admin-nav em {
+    margin-left: auto;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: #ffffff25;
+    font-size: 10px;
+    font-style: normal;
+}
+
+.kremah-admin .kremah-admin-sidebar-bottom {
+    margin-top: auto;
+}
+
+.kremah-admin .kremah-admin-storage {
+    margin: 12px 3px 15px;
+    padding: 14px;
+    border: 1px solid #d4af3730;
+    border-radius: 12px;
+    background: #160b0540;
+}
+
+.kremah-admin .kremah-admin-storage b {
+    color: #f7ead5;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-storage p {
+    margin: 7px 0 12px;
+    color: #b6a28a;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.kremah-admin .kremah-admin-storage>div {
+    height: 4px;
+    border-radius: 8px;
+    background: #ffffff20;
+}
+
+.kremah-admin .kremah-admin-storage>div i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: #d4af37;
+}
+
+.kremah-admin .kremah-admin-storage small {
+    display: block;
+    margin-top: 7px;
+    color: #b6a28a;
+    font-size: 9px;
+}
+
+.kremah-admin .kremah-admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 15px 5px 0;
+    border-top: 1px solid #ffffff20;
+}
+
+.kremah-admin .kremah-admin-profile>span {
+    display: grid;
+    flex: 0 0 31px;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border-radius: 50%;
+    background: #d4af37;
+    color: #25160f;
+    font-weight: 700;
+}
+
+.kremah-admin .kremah-admin-profile b,
+.kremah-admin .kremah-admin-profile small {
+    display: block;
+}
+
+.kremah-admin .kremah-admin-profile b {
+    color: #fff;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-profile small {
+    margin-top: 3px;
+    color: #b6a28a;
+    font-size: 9px;
+}
+
+.kremah-admin .kremah-admin-profile>i {
+    margin-left: auto;
+    color: #fff;
+    font-style: normal;
+}
+
+.kremah-admin .kremah-admin-main {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: var(--ka-cream);
+    color: var(--ka-ink);
+}
+
+.kremah-admin .kremah-admin-topbar {
+    position: sticky;
+    z-index: 5;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 65px;
+    padding: 0 37px;
+    border-bottom: 1px solid var(--ka-border);
+    background: var(--ka-paper);
+    color: #927f6b;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.kremah-admin .kremah-admin-topbar>div span {
+    margin: 0 10px;
+    color: #d2c6b7;
+}
+
+.kremah-admin .kremah-admin-topbar>div b {
+    color: #5a3a23;
+}
+
+.kremah-admin .kremah-admin-topbar section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.kremah-admin .kremah-admin-topbar section label {
+    padding: 7px 10px;
+    border: 1px solid #eee0c9;
+    border-radius: 30px;
+    background: #f8f1e5;
+    color: #8a7256;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.kremah-admin .kremah-admin-topbar section label i {
+    width: 6px;
+    height: 6px;
+    background: #d4af37;
+}
+
+.kremah-admin .kremah-admin-topbar section>b {
+    display: grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    border-radius: 50%;
+    background: #d4af37;
+    color: #25160f;
+    font-size: 12px;
+}
+
+.kremah-admin .kremah-admin-content {
+    position: relative;
+    width: 100%;
+    max-width: 1500px;
+    min-height: calc(100vh - 65px);
+    margin: 0 auto;
+    padding: 35px 38px 55px;
+    background: transparent;
+}
+
+.kremah-admin .kremah-admin-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.kremah-admin .kremah-admin-eyebrow {
+    margin-bottom: 9px;
+    color: #a77b1f;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.kremah-admin .kremah-admin-heading h1 {
+    margin: 0;
+    color: #342012;
+    font: 600 30px/1.2 'Playfair Display', serif;
+    letter-spacing: -.5px;
+}
+
+.kremah-admin .kremah-admin-heading p,
+.kremah-admin .kremah-admin-panel-head p {
+    margin: 7px 0 0;
+    color: #988775;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px 16px;
+    border: 0;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: transform .2s, filter .2s;
+}
+
+.kremah-admin .kremah-admin-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+.kremah-admin .kremah-admin-btn.dark {
+    background: #352012;
+    color: #f1d88e;
+    box-shadow: 0 5px 13px #2c1a0e20;
+}
+
+.kremah-admin .kremah-admin-btn.gold {
+    background: #d4af37;
+    color: #25160f;
+}
+
+.kremah-admin .kremah-admin-btn.light {
+    border: 1px solid #e9ddcc;
+    background: #f7f0e5;
+    color: #5d432b;
+}
+
+.kremah-admin .kremah-admin-btn.danger {
+    background: #a94d3d;
+    color: #fff;
+}
+
+.kremah-admin .kremah-admin-icon-btn {
+    display: inline-grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    border: 1px solid #eee3d5;
+    border-radius: 8px;
+    background: #fffdf9;
+    color: #71563b;
+}
+
+.kremah-admin .kremah-admin-icon-btn:hover {
+    border-color: #d4af37;
+    background: #fbf5e9;
+    color: #9b681b;
+}
+
+.kremah-admin .kremah-admin-link {
+    border: 0;
+    background: transparent;
+    color: #98701f;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.kremah-admin .kremah-admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.kremah-admin .kremah-admin-stat {
+    min-width: 0;
+    padding: 19px 20px;
+    border: 1px solid var(--ka-border);
+    border-radius: 13px;
+    background: var(--ka-paper);
+    box-shadow: 0 5px 18px #38251608;
+}
+
+.kremah-admin .kremah-admin-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #88796b;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.kremah-admin .kremah-admin-stat-top span {
+    display: grid;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--ka-gold-soft);
+    color: #8b681b;
+    font-size: 15px;
+}
+
+.kremah-admin .kremah-admin-stat strong {
+    display: block;
+    margin-top: 12px;
+    color: #302014;
+    font: 600 25px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-stat small {
+    display: block;
+    margin-top: 4px;
+    color: #a0907e;
+    font-size: 10px;
+}
+
+.kremah-admin .kremah-admin-overview-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+    gap: 18px;
+}
+
+.kremah-admin .kremah-admin-panel {
+    min-width: 0;
+    padding: 21px;
+    border: 1px solid var(--ka-border);
+    border-radius: 13px;
+    background: var(--ka-paper);
+    box-shadow: 0 5px 18px #38251608;
+}
+
+.kremah-admin .kremah-admin-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 17px;
+}
+
+.kremah-admin .kremah-admin-panel-head h2,
+.kremah-admin .kremah-admin-panel>h2 {
+    margin: 0;
+    color: #392719;
+    font: 600 18px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-count {
+    display: inline-grid;
+    min-width: 22px;
+    height: 22px;
+    margin-left: 5px;
+    padding: 0 6px;
+    place-items: center;
+    border-radius: 20px;
+    background: #f4ead6;
+    color: #8b681b;
+    font: 700 10px 'DM Sans', sans-serif;
+}
+
+.kremah-admin .kremah-admin-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.kremah-admin table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.kremah-admin th {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--ka-border);
+    color: #9a8977;
+    font-size: 9px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.kremah-admin td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #f0e9df;
+    color: #57483b;
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+.kremah-admin tr:last-child td {
+    border-bottom: 0;
+}
+
+.kremah-admin td b {
+    color: #382719;
+}
+
+.kremah-admin td small {
+    display: block;
+    margin-top: 4px;
+    color: #a19180;
+    font-size: 9px;
+}
+
+.kremah-admin .kremah-admin-status {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #f4ecd9;
+    color: #88651b;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.kremah-admin .kremah-admin-status.pending {
+    background: #fff2d7;
+    color: #9b6a13;
+}
+
+.kremah-admin .kremah-admin-status.preparing {
+    background: #e8eefc;
+    color: #536da2;
+}
+
+.kremah-admin .kremah-admin-status.completed {
+    background: #e4f2e8;
+    color: #39754a;
+}
+
+.kremah-admin .kremah-admin-status.cancelled {
+    background: #f8e6e2;
+    color: #a34c3f;
+}
+
+.kremah-admin .kremah-admin-category-list {
+    display: grid;
+    gap: 4px;
+}
+
+.kremah-admin .kremah-admin-category-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 2px;
+    border-bottom: 1px solid #f0e9df;
+    color: #514133;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-category-row:last-child {
+    border: 0;
+}
+
+.kremah-admin .kremah-admin-category-row>span {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border-radius: 9px;
+    background: #f6efdf;
+    font-size: 15px;
+}
+
+.kremah-admin .kremah-admin-category-row small {
+    display: block;
+    margin-top: 3px;
+    color: #a19180;
+    font-size: 9px;
+}
+
+.kremah-admin .kremah-admin-category-row>b {
+    margin-left: auto;
+    color: #8a6b37;
+}
+
+.kremah-admin .kremah-admin-note {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 19px;
+    padding: 17px 19px;
+    border: 1px solid #eadbb8;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #f8f0dc, #fffdf8);
+}
+
+.kremah-admin .kremah-admin-note>span {
+    color: #b58a2d;
+    font-size: 23px;
+}
+
+.kremah-admin .kremah-admin-note b {
+    color: #50351f;
+    font: 600 15px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-note p {
+    margin: 4px 0 0;
+    color: #8d7c68;
+    font-size: 10px;
+}
+
+.kremah-admin .kremah-admin-note>small {
+    margin-left: auto;
+    color: #a58a50;
+    font-size: 8px;
+    letter-spacing: 1.2px;
+}
+
+.kremah-admin .kremah-admin-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.kremah-admin input,
+.kremah-admin select,
+.kremah-admin textarea {
+    max-width: 100%;
+    min-height: 39px;
+    padding: 9px 11px;
+    border: 1px solid #e6dccd;
+    border-radius: 8px;
+    outline: none;
+    background: #fffefa;
+    color: #382719;
+    font-size: 11px;
+}
+
+.kremah-admin input:focus,
+.kremah-admin select:focus,
+.kremah-admin textarea:focus {
+    border-color: #c6a044;
+    box-shadow: 0 0 0 3px #d4af3720;
+}
+
+.kremah-admin input::placeholder,
+.kremah-admin textarea::placeholder {
+    color: #aa9b8b;
+}
+
+.kremah-admin .kremah-admin-small-select {
+    min-height: 31px;
+    padding: 5px 8px;
+    font-size: 10px;
+}
+
+.kremah-admin .kremah-admin-product-icon {
+    display: inline-grid;
+    width: 29px;
+    height: 29px;
+    margin-right: 8px;
+    place-items: center;
+    border-radius: 8px;
+    background: #f5eddf;
+    vertical-align: middle;
+}
+
+.kremah-admin .kremah-admin-low {
+    color: #b34d3e !important;
+    font-weight: 700;
+}
+
+.kremah-admin .kremah-admin-visible {
+    color: #47835a;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.kremah-admin .kremah-admin-visible.off {
+    color: #a28f7d;
+}
+
+.kremah-admin .kremah-admin-empty {
+    padding: 35px 15px;
+    color: #968675;
+    text-align: center;
+    font-size: 12px;
+}
+
+.kremah-admin .kremah-admin-add {
+    display: flex;
+    gap: 10px;
+}
+
+.kremah-admin .kremah-admin-category-manager {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
+}
+
+.kremah-admin .kremah-admin-category-manager>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--ka-border);
+    border-radius: 10px;
+    background: #fffefa;
+}
+
+.kremah-admin .kremah-admin-category-manager button {
+    border: 0;
+    background: transparent;
+    color: #a94d3d;
+}
+
+.kremah-admin .kremah-admin-settings {
+    max-width: 900px;
+}
+
+.kremah-admin .kremah-admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.kremah-admin .kremah-admin-form-grid label {
+    display: grid;
+    gap: 7px;
+    color: #6d5844;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.kremah-admin .kremah-admin-form-grid label.wide {
+    grid-column: 1/-1;
+}
+
+.kremah-admin .kremah-admin-form-grid input,
+.kremah-admin .kremah-admin-form-grid select,
+.kremah-admin .kremah-admin-form-grid textarea {
+    width: 100%;
+}
+
+.kremah-admin .kremah-admin-form-grid textarea {
+    resize: vertical;
+}
+
+.kremah-admin .kremah-admin-live-preview {
+    margin: 20px 0;
+    padding: 24px;
+    border: 1px solid #e9dcbf;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2b1a10, #503421);
+    color: #fdf8ef;
+}
+
+.kremah-admin .kremah-admin-live-preview>small {
+    color: #dfc36d;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.kremah-admin .kremah-admin-live-preview h2 {
+    margin: 13px 0 5px;
+    color: #fff9ec;
+    font: 600 30px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-live-preview h2 i {
+    color: #e5c56a;
+}
+
+.kremah-admin .kremah-admin-live-preview>b {
+    color: #e5c56a;
+    font-size: 10px;
+}
+
+.kremah-admin .kremah-admin-live-preview p {
+    color: #e5d9c7;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-backup-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.kremah-admin .kremah-admin-backup-icon {
+    display: grid;
+    width: 43px;
+    height: 43px;
+    margin-bottom: 16px;
+    place-items: center;
+    border-radius: 12px;
+    background: #f4ead2;
+    color: #8c691d;
+    font-size: 21px;
+}
+
+.kremah-admin .kremah-admin-panel>p {
+    color: #91816f;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.kremah-admin .kremah-admin-danger {
+    border-color: #efd8d3;
+}
+
+.kremah-admin .kremah-admin-danger .kremah-admin-backup-icon {
+    background: #f8e8e4;
+    color: #a94d3d;
+}
+
+.kremah-admin .kremah-admin-toast {
+    position: fixed;
+    z-index: 30;
+    right: 24px;
+    bottom: 24px;
+    max-width: min(420px, calc(100vw - 32px));
+    padding: 13px 18px;
+    border: 1px solid #d8c18a;
+    border-radius: 10px;
+    background: #2c1b11;
+    color: #f8e9bd;
+    box-shadow: 0 12px 35px #25160f30;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-backdrop {
+    position: fixed;
+    z-index: 50;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: #1b100bc7;
+    backdrop-filter: blur(4px);
+}
+
+.kremah-admin .kremah-admin-modal {
+    position: relative;
+    width: min(620px, 100%);
+    max-height: 90vh;
+    overflow: auto;
+    padding: 28px;
+    border: 1px solid #eadfcf;
+    border-radius: 16px;
+    background: #fffdf8;
+    box-shadow: 0 25px 80px #0004;
+}
+
+.kremah-admin .kremah-admin-modal h2 {
+    margin: 0;
+    color: #392719;
+    font: 600 24px 'Playfair Display', serif;
+}
+
+.kremah-admin .kremah-admin-modal>p {
+    margin: 7px 0 20px;
+    color: #93816e;
+    font-size: 11px;
+}
+
+.kremah-admin .kremah-admin-close {
+    position: absolute;
+    top: 15px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    background: #f5eddf;
+    color: #5a4029;
+    font-size: 20px;
+}
+
+.kremah-admin .kremah-admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 20px;
+}
+
+@media (max-width:1100px) {
+    .kremah-admin .kremah-admin-sidebar {
+        flex-basis: 225px;
+        width: 225px;
+        min-width: 225px;
+    }
+
+    .kremah-admin .kremah-admin-content {
+        padding: 28px 24px 45px;
+    }
+
+    .kremah-admin .kremah-admin-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .kremah-admin .kremah-admin-overview-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:720px) {
+    .kremah-admin {
+        display: block;
+        overflow: visible;
+    }
+
+    .kremah-admin .kremah-admin-sidebar {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+        padding: 15px;
+    }
+
+    .kremah-admin .kremah-admin-brand {
+        padding-bottom: 14px;
+    }
+
+    .kremah-admin .kremah-admin-workspace,
+    .kremah-admin .kremah-admin-nav-label,
+    .kremah-admin .kremah-admin-storage,
+    .kremah-admin .kremah-admin-profile {
+        display: none;
+    }
+
+    .kremah-admin .kremah-admin-nav {
+        display: flex;
+        gap: 6px;
+        margin-top: 13px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+    }
+
+    .kremah-admin .kremah-admin-nav button {
+        flex: 0 0 auto;
+        width: auto;
+        min-height: 38px;
+        padding: 9px 11px;
+        white-space: nowrap;
+    }
+
+    .kremah-admin .kremah-admin-nav button>span {
+        display: none;
+    }
+
+    .kremah-admin .kremah-admin-main {
+        min-height: calc(100vh - 125px);
+    }
+
+    .kremah-admin .kremah-admin-topbar {
+        min-height: 54px;
+        padding: 0 16px;
+    }
+
+    .kremah-admin .kremah-admin-topbar section {
+        gap: 8px;
+    }
+
+    .kremah-admin .kremah-admin-content {
+        padding: 24px 15px 40px;
+    }
+
+    .kremah-admin .kremah-admin-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .kremah-admin .kremah-admin-heading h1 {
+        font-size: 26px;
+    }
+
+    .kremah-admin .kremah-admin-stats {
+        gap: 10px;
+    }
+
+    .kremah-admin .kremah-admin-stat {
+        padding: 14px;
+    }
+
+    .kremah-admin .kremah-admin-stat strong {
+        font-size: 21px;
+    }
+
+    .kremah-admin .kremah-admin-panel {
+        padding: 15px;
+    }
+
+    .kremah-admin .kremah-admin-panel-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .kremah-admin .kremah-admin-filters {
+        width: 100%;
+    }
+
+    .kremah-admin .kremah-admin-filters input,
+    .kremah-admin .kremah-admin-filters select {
+        flex: 1 1 140px;
+    }
+
+    .kremah-admin .kremah-admin-form-grid,
+    .kremah-admin .kremah-admin-backup-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kremah-admin .kremah-admin-form-grid label.wide {
+        grid-column: auto;
+    }
+
+    .kremah-admin .kremah-admin-note {
+        align-items: flex-start;
+    }
+
+    .kremah-admin .kremah-admin-note>small {
+        display: none;
+    }
+}
+
+@media (max-width:420px) {
+    .kremah-admin .kremah-admin-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .kremah-admin .kremah-admin-topbar {
+        font-size: 8px;
+        letter-spacing: .7px;
+    }
+
+    .kremah-admin .kremah-admin-topbar section label {
+        padding: 6px 7px;
+        font-size: 8px;
+    }
+
+    .kremah-admin .kremah-admin-modal {
+        padding: 23px 16px;
+    }
+}
+
+/* Hard reset for legacy.css element selectors that are global on the storefront. */
+.kremah-admin nav {
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    max-width: none;
+    z-index: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    transform: none;
+}
+
+.kremah-admin header,
+.kremah-admin main,
+.kremah-admin section,
+.kremah-admin aside,
+.kremah-admin article {
+    margin-top: 0;
+}
+
+.kremah-admin button {
+    letter-spacing: normal;
+    text-transform: none;
+}
