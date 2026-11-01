@@ -162,9 +162,26 @@ router.post("/login", loginLimiter, async (req, res, next) => {
       WHERE email = ?
     `).get(email);
 
-    const valid = customer
-      ? await bcrypt.compare(password, customer.password_hash)
-      : false;
+    if (!customer) {
+      console.warn(`[CUSTOMER LOGIN] Account not found: ${email}`);
+
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password, or account unavailable",
+      });
+    }
+
+    const valid = await bcrypt.compare(
+      password,
+      customer.password_hash
+    );
+
+    console.log("[CUSTOMER LOGIN]", {
+      email,
+      accountFound: true,
+      passwordMatches: valid,
+      accountStatus: customer.status,
+    });
 
     if (!valid || customer.status !== "active") {
       return res.status(401).json({
@@ -180,7 +197,7 @@ router.post("/login", loginLimiter, async (req, res, next) => {
       maxAge: SESSION_DURATION_MS,
     });
 
-    res.json({
+    return res.json({
       success: true,
       message: "Login successful",
       data: {
