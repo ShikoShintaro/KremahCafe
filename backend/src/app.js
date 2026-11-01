@@ -13,8 +13,20 @@ app.set("trust proxy", 1);
 app.disable("x-powered-by");
 app.use(helmet());
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://192.168.100.7:5173",
+  "https://kremah-cafe.vercel.app",
+];
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "https://kremah-cafe.vercel.app/",
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked: ${origin}`));
+  },
   credentials: true,
 }));
 
