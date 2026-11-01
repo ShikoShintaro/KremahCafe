@@ -260,15 +260,14 @@ function CustomerHome() {
                     type="button"
                     aria-label="Close login"
                     onClick={() => setLoginOpen(false)}
+                    onMouseDown={(event) => {
+                      if (event.target === event.currentTarget) {
+                        setLoginOpen(false);
+                      }
+                    }}
                   >
                     ×
                   </button>
-
-                  onMouseDown={(event) => {
-                    if (event.target === event.currentTarget) {
-                      setLoginOpen(false);
-                    }
-                  }}
 
                   <div className="login-heading">
                     <span className="login-brand-mark">K</span>
