@@ -1,6 +1,6 @@
 const API_BASE_URL = (
   import.meta.env.VITE_API_BASE_URL ||
-  "http://localhost:3000/api/v1"
+  "https://generic-overuse-ability.ngrok-free.dev/api/v1"
 ).replace(/\/+$/, "");
 
 async function request(path, options = {}) {
@@ -8,6 +8,7 @@ async function request(path, options = {}) {
     ...options,
     credentials: "include",
     headers: {
+      "ngrok-skip-browser-warning": "true",
       ...(options.body ? { "Content-Type": "application/json" } : {}),
       ...options.headers,
     },
@@ -46,8 +47,7 @@ export const api = {
   customerLogin: (credentials) =>
     request("/customer-auth/login", json(credentials)),
 
-  customerMe: () =>
-    request("/customer-auth/me"),
+  customerMe: () => request("/customer-auth/me"),
 
   customerLogout: () =>
     request("/customer-auth/logout", json({})),
