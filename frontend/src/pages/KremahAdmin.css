@@ -1,0 +1,671 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+.ka-app,
+.ka-login {
+    font-family: "DM Sans", sans-serif;
+    color: #38291f
+}
+
+.ka-app {
+    --gold: #b98b4a;
+    min-height: 100vh;
+    background: #f6f3ed;
+    display: flex
+}
+
+.ka-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 245px;
+    padding: 27px 19px;
+    background: #30221c;
+    color: #f8f1e7;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    box-sizing: border-box
+}
+
+.ka-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f5e8d4;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .13em
+}
+
+.ka-logo i {
+    font-family: "Playfair Display", serif;
+    font-weight: 500
+}
+
+.ka-logo small {
+    display: block;
+    color: #bda88f;
+    font-size: 9px;
+    letter-spacing: .2em;
+    margin-top: 4px
+}
+
+.ka-mark-small,
+.ka-mark {
+    display: grid;
+    place-items: center;
+    background: #b98b4a;
+    color: #30221c;
+    border-radius: 12px;
+    font: 24px "Playfair Display", serif;
+    width: 40px;
+    height: 40px
+}
+
+.ka-nav-label,
+.ka-kicker {
+    font-size: 10px;
+    letter-spacing: .18em;
+    font-weight: 700;
+    color: #a68c6d
+}
+
+.ka-nav-label {
+    margin: 48px 0 13px 9px
+}
+
+.ka-sidebar nav {
+    display: grid;
+    gap: 6px
+}
+
+.ka-sidebar nav button {
+    border: 0;
+    background: none;
+    color: #c8b9a8;
+    text-align: left;
+    padding: 12px;
+    border-radius: 9px;
+    font: 600 12px "DM Sans";
+    cursor: pointer
+}
+
+.ka-sidebar nav button.active,
+.ka-sidebar nav button:hover {
+    background: #49362b;
+    color: #f2c783
+}
+
+.ka-user {
+    margin-top: auto;
+    border-top: 1px solid #554438;
+    padding-top: 14px
+}
+
+.ka-user b,
+.ka-user small {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px
+}
+
+.ka-user b {
+    font-size: 10px
+}
+
+.ka-user small {
+    font-size: 10px;
+    color: #bda88f;
+    margin: 4px 0 10px
+}
+
+.ka-user button,
+.ka-user a {
+    display: block;
+    border: 0;
+    background: none;
+    color: #d8c8b5;
+    text-decoration: none;
+    padding: 9px 0;
+    font: 11px "DM Sans";
+    cursor: pointer
+}
+
+.ka-user a {
+    color: #b98b4a
+}
+
+.ka-main {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    min-width: 0
+}
+
+.ka-topbar {
+    height: 96px;
+    background: #fffdf9;
+    border-bottom: 1px solid #e9e1d5;
+    padding: 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.ka-topbar h1 {
+    font: 600 24px "Playfair Display";
+    margin: 5px 0
+}
+
+.ka-content {
+    max-width: 1450px;
+    margin: auto;
+    padding: 32px 38px
+}
+
+.ka-welcome {
+    margin-bottom: 23px
+}
+
+.ka-welcome h2 {
+    font: 600 27px "Playfair Display";
+    margin: 7px 0
+}
+
+.ka-muted,
+.ka-panel header p {
+    color: #928578;
+    font-size: 12px;
+    margin: 5px 0
+}
+
+.ka-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 17px
+}
+
+.ka-stat,
+.ka-panel {
+    background: #fffdf9;
+    border: 1px solid #e9e1d5;
+    border-radius: 12px
+}
+
+.ka-stat {
+    padding: 18px
+}
+
+.ka-stat span {
+    display: block;
+    color: #82766a;
+    font-size: 11px
+}
+
+.ka-stat strong {
+    display: block;
+    font: 600 25px "Playfair Display";
+    margin: 11px 0 3px
+}
+
+.ka-panels {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 15px
+}
+
+.ka-panel {
+    padding: 20px;
+    min-width: 0
+}
+
+.ka-panel>header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 17px
+}
+
+.ka-panel h3 {
+    font: 600 17px "Playfair Display";
+    margin: 0
+}
+
+.ka-panel header p {
+    font-size: 11px
+}
+
+.ka-table-scroll {
+    overflow: auto
+}
+
+.ka-table-scroll table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap
+}
+
+.ka-table-scroll th {
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #a09385;
+    padding: 10px;
+    border-bottom: 1px solid #e9e1d5
+}
+
+.ka-table-scroll td {
+    font-size: 11px;
+    color: #5b4b40;
+    padding: 12px 10px;
+    border-bottom: 1px solid #f0ebe4
+}
+
+.ka-empty {
+    text-align: center;
+    padding: 28px 10px;
+    color: #a09385;
+    font-size: 11px
+}
+
+.ka-footer {
+    text-align: center;
+    color: #b1a599;
+    font-size: 10px;
+    padding: 28px 0 6px
+}
+
+.ka-primary,
+.ka-secondary {
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font: 700 11px "DM Sans";
+    cursor: pointer
+}
+
+.ka-primary {
+    background: #a97c43;
+    color: white
+}
+
+.ka-primary:hover {
+    background: #936a38
+}
+
+.ka-secondary {
+    background: #f2ede5;
+    color: #6d5c4d
+}
+
+.ka-primary:disabled {
+    opacity: .6;
+    cursor: wait
+}
+
+.ka-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px
+}
+
+.ka-tools>input,
+.ka-category-add input {
+    border: 1px solid #e4dbcf;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font: 11px "DM Sans";
+    min-width: 200px
+}
+
+.ka-tools label {
+    font-size: 10px;
+    color: #82766a
+}
+
+.ka-tools input[type=checkbox],
+.ka-check input {
+    accent-color: #a97c43
+}
+
+.ka-row-actions {
+    display: flex;
+    gap: 6px
+}
+
+.ka-row-actions button {
+    border: 0;
+    border-radius: 6px;
+    padding: 7px 9px;
+    background: #f5f0e8;
+    color: #765a3d;
+    font: 600 10px "DM Sans";
+    cursor: pointer
+}
+
+.ka-row-actions .ka-danger {
+    background: #fbefed;
+    color: #ae6259
+}
+
+.ka-category-add {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 14px
+}
+
+.ka-category {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #eee7dc
+}
+
+.ka-category>div:first-child {
+    flex: 1
+}
+
+.ka-category b,
+.ka-category small {
+    display: block
+}
+
+.ka-category b {
+    font-size: 11px
+}
+
+.ka-category small {
+    font-size: 9px;
+    color: #a09385;
+    margin-top: 4px
+}
+
+.ka-alert,
+.ka-success {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 13px;
+    border-radius: 8px;
+    font-size: 11px;
+    margin-bottom: 10px;
+    background: #fff0ed;
+    color: #a33d32
+}
+
+.ka-success {
+    background: #eaf4ed;
+    color: #47815a
+}
+
+.ka-alert button,
+.ka-success button {
+    border: 0;
+    background: none;
+    font-size: 16px;
+    cursor: pointer
+}
+
+.ka-login {
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% 20%, #604734, #30221c 60%, #211712);
+    display: grid;
+    place-items: center;
+    padding: 22px;
+    box-sizing: border-box
+}
+
+.ka-login-card {
+    width: min(100%, 410px);
+    background: #fffdf9;
+    border: 1px solid #d8c3a3;
+    border-radius: 19px;
+    padding: 35px;
+    box-shadow: 0 25px 80px #160e0a66;
+    box-sizing: border-box
+}
+
+.ka-mark {
+    margin-bottom: 24px
+}
+
+.ka-login-card .ka-kicker {
+    color: #a77b40
+}
+
+.ka-login-card h1 {
+    font: 600 34px "Playfair Display";
+    margin: 8px 0
+}
+
+.ka-login-card .ka-muted {
+    line-height: 1.7;
+    margin-bottom: 23px
+}
+
+.ka-form {
+    display: grid;
+    gap: 14px
+}
+
+.ka-form label {
+    display: grid;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #6d5c4d
+}
+
+.ka-form input:not([type=checkbox]),
+.ka-form select,
+.ka-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e4dbcf;
+    border-radius: 8px;
+    padding: 11px 12px;
+    background: #fffdfa;
+    color: #44352b;
+    font: 12px "DM Sans";
+    outline: none
+}
+
+.ka-form input:focus,
+.ka-form select:focus,
+.ka-form textarea:focus {
+    border-color: #b98b4a;
+    box-shadow: 0 0 0 3px #b98b4a1a
+}
+
+.ka-login-note {
+    display: block;
+    text-align: center;
+    color: #a09385;
+    font-size: 10px;
+    margin-top: 20px
+}
+
+.ka-error {
+    background: #fff0ed;
+    color: #a33d32;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    margin: 0
+}
+
+.ka-overlay {
+    position: fixed;
+    inset: 0;
+    background: #211712a8;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    z-index: 20;
+    overflow: auto
+}
+
+.ka-modal {
+    width: min(100%, 680px);
+    background: #fffdf9;
+    border-radius: 15px;
+    padding: 23px;
+    max-height: calc(100vh - 36px);
+    overflow: auto;
+    box-sizing: border-box
+}
+
+.ka-modal>header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px
+}
+
+.ka-modal h2 {
+    font: 600 22px "Playfair Display";
+    margin: 5px 0
+}
+
+.ka-close {
+    border: 0;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    font-size: 20px;
+    cursor: pointer
+}
+
+.ka-grid {
+    grid-template-columns: 1fr 1fr
+}
+
+.ka-wide {
+    grid-column: span 2
+}
+
+.ka-check {
+    display: flex !important;
+    align-items: center;
+    gap: 8px !important
+}
+
+.ka-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px
+}
+
+@media(max-width:1050px) {
+    .ka-sidebar {
+        width: 215px
+    }
+
+    .ka-main {
+        margin-left: 215px;
+        width: calc(100% - 215px)
+    }
+
+    .ka-stats {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .ka-panels {
+        grid-template-columns: 1fr
+    }
+}
+
+@media(max-width:680px) {
+    .ka-app {
+        display: block
+    }
+
+    .ka-sidebar {
+        position: static;
+        width: auto;
+        padding: 12px
+    }
+
+    .ka-nav-label,
+    .ka-user {
+        display: none
+    }
+
+    .ka-sidebar nav {
+        display: flex;
+        overflow: auto;
+        margin-top: 12px
+    }
+
+    .ka-sidebar nav button {
+        white-space: nowrap;
+        padding: 9px;
+        font-size: 10px
+    }
+
+    .ka-main {
+        margin: 0;
+        width: 100%
+    }
+
+    .ka-topbar {
+        height: auto;
+        padding: 17px
+    }
+
+    .ka-content {
+        padding: 17px 12px
+    }
+
+    .ka-stats {
+        gap: 8px
+    }
+
+    .ka-stat {
+        padding: 13px
+    }
+
+    .ka-stat strong {
+        font-size: 21px
+    }
+
+    .ka-panel {
+        padding: 13px
+    }
+
+    .ka-tools,
+    .ka-category-add {
+        align-items: stretch;
+        flex-direction: column
+    }
+
+    .ka-category {
+        flex-wrap: wrap
+    }
+
+    .ka-category>div:first-child {
+        min-width: 55%
+    }
+
+    .ka-login-card {
+        padding: 27px 21px
+    }
+
+    .ka-grid {
+        grid-template-columns: 1fr
+    }
+
+    .ka-wide {
+        grid-column: span 1
+    }
+
+    .ka-modal {
+        padding: 17px
+    }
+}

@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { api } from "./lib/api";
 import "./legacy.css";
 
+import KremahAdmin from "./pages/KremahAdmin";
+
 const money = (value) =>
   new Intl.NumberFormat("en-PH", {
     style: "currency",
@@ -156,6 +158,12 @@ function CustomerDashboard({ customer, onLogout, onBackToStore }) {
 }
 
 export default function App() {
+  const isAdminPortal = window.location.pathname.startsWith("/management-portal");
+
+  return isAdminPortal ? <KremahAdmin/> : <StorefrontApp/>;
+}
+
+export function StorefrontApp() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
