@@ -1,13 +1,527 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kremah Café - Sta. Ana, San Mateo</title>
+  <!-- Favicon updated to your logo -->
+  <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=128&q=80">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #fcf9f4;
+      --bg-card: #ffffff;
+      --bg-sidebar: #f5eedf;
+      --bg-hero: #ece0cd;
+      --text-dark: #2b1f1d;
+      --text-muted: #736357;
+      --accent-brown: #6f4e37;
+      --accent-brown-hover: #523825;
+      --accent-amber: #d97706;
+      --border-color: #e6dac8;
+      --tag-bg: #f3e9d9;
+      --shadow: 0 4px 16px rgba(61, 35, 20, 0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg-main: #181311;
+      --bg-card: #241c19;
+      --bg-sidebar: #1f1815;
+      --bg-hero: #2f221c;
+      --text-dark: #f5eedf;
+      --text-muted: #a8988b;
+      --accent-brown: #c49a78;
+      --accent-brown-hover: #d1ab8b;
+      --accent-amber: #f59e0b;
+      --border-color: #3a2e28;
+      --tag-bg: #2d231e;
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-main); color: var(--text-dark); font-family: 'Inter', sans-serif; line-height: 1.5; }
+
+    /* Header */
+    header { background: var(--bg-main); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1300px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); cursor: pointer; }
+    .logo-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-amber); }
+    .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.25rem; line-height: 1; }
+    .logo-text p { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px; }
+
+    .search-input { width: 100%; max-width: 360px; padding: 10px 16px; background: var(--bg-card); color: var(--text-dark); border: 1px solid var(--border-color); border-radius: 99px; font-size: 0.85rem; outline: none; }
+    .nav-actions { display: flex; align-items: center; gap: 14px; font-size: 0.85rem; }
+    .theme-btn { background: var(--tag-bg); border: 1px solid var(--border-color); color: var(--text-dark); padding: 8px 14px; border-radius: 99px; cursor: pointer; }
+
+    .sub-nav { max-width: 1300px; margin: 0 auto; padding: 0 24px 12px; display: flex; gap: 24px; }
+    .sub-nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; cursor: pointer; padding-bottom: 4px; border-bottom: 2px solid transparent; }
+    .sub-nav a.active { color: var(--accent-brown); font-weight: 600; border-bottom-color: var(--accent-brown); }
+
+    /* Layout */
+    .view { display: none; max-width: 1300px; margin: 0 auto; padding: 24px; }
+    .view.active { display: block; }
+    .grid-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; }
+    @media(max-width: 900px) { .grid-layout { grid-template-columns: 1fr; } }
+
+    /* Hero Banner */
+    .hero { background: var(--bg-hero); border-radius: 14px; padding: 28px; margin-bottom: 24px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .hero h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin: 6px 0; }
+    .hero span { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-brown); font-weight: 700; }
+    .hero-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-amber); box-shadow: var(--shadow); }
+
+    /* Pills */
+    .pills { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px; }
+    .pill { background: var(--tag-bg); color: var(--text-dark); border: 1px solid var(--border-color); padding: 7px 16px; border-radius: 99px; font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
+    .pill.active, .pill:hover { background: var(--accent-brown); color: #fff; border-color: var(--accent-brown); }
+
+    /* Menu Cards */
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+    .card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+    .card-img { height: 170px; width: 100%; background: var(--tag-bg); position: relative; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-badge { position: absolute; top: 10px; left: 10px; background: var(--bg-card); color: var(--text-dark); padding: 3px 8px; border-radius: 99px; font-size: 0.65rem; font-weight: 600; }
+    .card-body { padding: 14px; display: flex; flex-direction: column; flex: 1; }
+    .card-cat { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 4px 0 8px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+    .card-price { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--accent-brown); }
+    .btn-add { background: var(--accent-brown); color: #fff; border: none; padding: 7px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+    .btn-add:hover { background: var(--accent-brown-hover); }
+
+    /* Sidebar Widgets */
+    .widget { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    .widget-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-brown); font-weight: 700; margin-bottom: 8px; display: block; }
+    .cart-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed var(--border-color); }
+    .qty-box { display: flex; align-items: center; gap: 6px; }
+    .qty-btn { background: var(--tag-bg); color: var(--text-dark); border: 1px solid var(--border-color); width: 22px; height: 22px; border-radius: 4px; cursor: pointer; }
+    .btn-action { width: 100%; background: var(--accent-brown); color: #fff; border: none; padding: 11px; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+    .btn-action:disabled { background: #888; cursor: not-allowed; }
+
+    /* Tables & Forms */
+    .content-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow); }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: var(--bg-main); color: var(--text-dark); border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; outline: none; }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.85rem; }
+    .data-table th, .data-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
+    .btn-del { background: #dc2626; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+
+    /* Modal */
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: grid; place-items: center; z-index: 1000; opacity: 0; visibility: hidden; }
+    .modal-bg.active { opacity: 1; visibility: visible; }
+    .modal { background: var(--bg-card); border-radius: 14px; width: 90%; max-width: 440px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .close-x { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo" onclick="switchView('menu')">
+        <!-- Logo Image Integration -->
+        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=128&q=80" alt="Kremah Cafe Logo" class="logo-img">
+        <div class="logo-text">
+          <h1>KREMAH CAFÉ</h1>
+          <p>Sta. Ana, San Mateo</p>
+        </div>
+      </div>
+      <input type="text" class="search-input" placeholder="Search menu items..." id="searchBox" onkeyup="filterSearch()">
+      <div class="nav-actions">
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+        <div>Basket (<span id="cartCount">0</span>)</div>
+      </div>
+    </div>
+    <nav class="sub-nav">
+      <a onclick="switchView('menu')" id="nav-menu" class="active">Menu</a>
+      <a onclick="switchView('orders')" id="nav-orders">My Orders</a>
+      <a onclick="switchView('reviews')" id="nav-reviews">Reviews</a>
+      <a onclick="switchView('story')" id="nav-story">Our Story</a>
+      <a onclick="promptAdmin()" style="color: var(--accent-brown); font-weight: 600;">🔒 Admin Panel</a>
+    </nav>
+  </header>
+
+  <!-- VIEW: MENU -->
+  <div class="view active" id="view-menu">
+    <div class="grid-layout">
+      <div>
+        <div class="hero">
+          <div>
+            <span>Official Menu Board</span>
+            <h2>Good drinks. Good food. Good vibes.</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Handcrafted frappes, matcha series, coffee, croffles, and snacks in San Mateo, Rizal.</p>
+          </div>
+          <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=256&q=80" alt="Kremah Cafe Branding" class="hero-logo">
+        </div>
+
+        <div class="pills">
+          <button class="pill active" onclick="filterCat('all', this)">All Items</button>
+          <button class="pill" onclick="filterCat('Frappe', this)">Frappe</button>
+          <button class="pill" onclick="filterCat('Matcha Series', this)">Matcha Series</button>
+          <button class="pill" onclick="filterCat('Coffee', this)">Coffee</button>
+          <button class="pill" onclick="filterCat('Non Coffee', this)">Non Coffee</button>
+          <button class="pill" onclick="filterCat('Pastries & Desserts', this)">Pastries & Desserts</button>
+          <button class="pill" onclick="filterCat('Snacks & Pasta', this)">Snacks & Pasta</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid"></div>
+      </div>
+
+      <div>
+        <div class="widget">
+          <span class="widget-title">Active Order</span>
+          <h4 style="font-family: 'Playfair Display'; font-size: 1rem;">Preparation in progress</h4>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin: 4px 0 10px;">Order #KC-8802 • Sta. Ana, San Mateo</p>
+          <div style="background: var(--tag-bg); padding: 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--accent-brown);">
+            🚴 Out for Delivery (~15 mins)
+          </div>
+        </div>
+
+        <div class="widget">
+          <span class="widget-title">Your Basket</span>
+          <div id="cartList" style="margin-top: 10px;"></div>
+          <div style="display: flex; justify-content: space-between; font-weight: 700; margin-top: 14px; font-size: 0.95rem;">
+            <span>Total</span>
+            <span id="cartTotal">₱0</span>
+          </div>
+          <button class="btn-action" id="checkoutBtn" onclick="openCheckout()" disabled>Proceed to Checkout →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: ORDERS -->
+  <div class="view" id="view-orders">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 style="font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 20px;">Order History</h2>
+      <div class="widget">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 10px;">
+          <div>
+            <h4 style="font-family: 'Playfair Display';">Order #KC-8802</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Sta. Ana, San Mateo Branch</p>
+          </div>
+          <span style="background: var(--tag-bg); color: var(--accent-brown); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 99px; height: fit-content;">Out for Delivery</span>
+        </div>
+        <p style="font-size: 0.85rem;">• 1x Spanish Latte (₱139)</p>
+        <p style="font-size: 0.85rem;">• 1x Biscoff Croffles (₱180)</p>
+        <div style="display: flex; justify-content: space-between; font-weight: 600; margin-top: 10px; font-size: 0.9rem;">
+          <span>Total: ₱319</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: REVIEWS -->
+  <div class="view" id="view-reviews">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 style="font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 6px;">Customer Reviews</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Feedback from San Mateo coffee lovers.</p>
+
+      <div class="content-box" style="margin-bottom: 24px;">
+        <h3 style="font-family: 'Playfair Display'; font-size: 1.1rem; margin-bottom: 12px;">Leave a Review</h3>
+        <form onsubmit="submitReview(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group"><label>Name</label><input type="text" id="revName" required placeholder="Gabriel Ramos"></div>
+            <div class="form-group"><label>Rating</label><select id="revRating"><option value="5">⭐⭐⭐⭐⭐ (5/5)</option><option value="4">⭐⭐⭐⭐ (4/5)</option></select></div>
+          </div>
+          <div class="form-group"><label>Comment</label><textarea id="revComment" rows="2" required placeholder="Great drinks and ambiance!"></textarea></div>
+          <button type="submit" class="btn-action" style="margin-top: 8px;">Post Review</button>
+        </form>
+      </div>
+      <div id="reviewsList"></div>
+    </div>
+  </div>
+
+  <!-- VIEW: STORY -->
+  <div class="view" id="view-story">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=256&q=80" alt="Kremah Logo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-amber); margin-bottom: 14px; box-shadow: var(--shadow);">
+      <span style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-brown); font-weight: 700;">Find Us & Order At</span>
+      <h2 style="font-family: 'Playfair Display'; font-size: 2.2rem; margin: 8px 0 20px;">Kremah Café Story</h2>
+      <div class="content-box" style="text-align: left; font-family: 'Playfair Display'; font-style: italic; font-size: 1.05rem; line-height: 1.7;">
+        "Located in Sta. Ana, San Mateo, Kremah Café brings together rich specialty coffee, earthy matcha blends, indulgent frappes, warm pastries, and comforting pasta. Good drinks. Good food. Good vibes. Sip the moment."
+      </div>
+      <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
+        <a href="https://instagram.com" target="_blank" class="pill">📷 Instagram: @Kremah Cafe</a>
+        <a href="https://facebook.com" target="_blank" class="pill">📘 Facebook: Kremah Cafe</a>
+        <a href="https://foodpanda.ph" target="_blank" class="pill">🐼 Foodpanda</a>
+        <a href="https://grab.com" target="_blank" class="pill">🟢 GrabFood</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: ADMIN -->
+  <div class="view" id="view-admin">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <h2 style="font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 6px;">Admin Management</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Manage menu items and prices.</p>
+
+      <div class="content-box">
+        <h3 style="font-family: 'Playfair Display'; font-size: 1.1rem; margin-bottom: 12px;">Add Menu Item</h3>
+        <form onsubmit="addItem(event)">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+            <div class="form-group"><label>Title</label><input type="text" id="addTitle" required></div>
+            <div class="form-group"><label>Category</label><select id="addCat"><option value="Frappe">Frappe</option><option value="Matcha Series">Matcha Series</option><option value="Coffee">Coffee</option><option value="Non Coffee">Non Coffee</option><option value="Pastries & Desserts">Pastries & Desserts</option><option value="Snacks & Pasta">Snacks & Pasta</option></select></div>
+            <div class="form-group"><label>Price (₱)</label><input type="number" id="addPrice" required></div>
+            <div class="form-group"><label>Badge</label><input type="text" id="addBadge" value="Bestseller"></div>
+          </div>
+          <div class="form-group"><label>Image URL</label><input type="url" id="addImg" value="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80" required></div>
+          <button type="submit" class="btn-action" style="margin-top: 8px;">Add Item</button>
+        </form>
+      </div>
+
+      <div class="content-box">
+        <h3 style="font-family: 'Playfair Display'; font-size: 1.1rem; margin-bottom: 12px;">Existing Items</h3>
+        <table class="data-table">
+          <thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Action</th></tr></thead>
+          <tbody id="adminTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-bg" id="checkoutModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 style="font-family: 'Playfair Display';">Checkout Order</h3>
+        <button class="close-x" onclick="toggleModal('checkoutModal', false)">&times;</button>
+      </div>
+      <form onsubmit="completeOrder(event)">
+        <div class="form-group"><label>Full Name</label><input type="text" required placeholder="Juan Dela Cruz"></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" required placeholder="0917XXXXXXX"></div>
+        <div class="form-group"><label>Delivery Address</label><input type="text" required placeholder="San Mateo, Rizal"></div>
+        <div class="form-group"><label>Payment Method</label><select><option>Cash on Delivery (COD)</option><option>GCash</option></select></div>
+        <div style="background: var(--tag-bg); padding: 10px; border-radius: 6px; margin: 12px 0; font-weight: 700; display: flex; justify-content: space-between;">
+          <span>Total:</span> <span id="modalTotal">₱0</span>
+        </div>
+        <button type="submit" class="btn-action" style="margin-top: 0;">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let menuData = [
+      { id: 1, title: "Biscoff Frappe", category: "Frappe", price: 200, badge: "Bestseller", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" },
+      { id: 2, title: "Ube Frappe", category: "Frappe", price: 170, badge: "Specialty", img: "https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&w=600&q=80" },
+      { id: 3, title: "Salted Caramel Frappe", category: "Frappe", price: 170, badge: "Popular", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" },
+      { id: 4, title: "Choco Java Chip Frappe", category: "Frappe", price: 190, badge: "Favorite", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" },
+      { id: 5, title: "Cookies & Cream Frappe", category: "Frappe", price: 170, badge: "Classic", img: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=600&q=80" },
+      { id: 6, title: "Mango Frappe", category: "Frappe", price: 170, badge: "Fruity", img: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=600&q=80" },
+      { id: 7, title: "Strawberry Frappe", category: "Frappe", price: 170, badge: "Fruity", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2KvenPxiRC0KyqUf-VeuXymCoXfT_N4iwL630RKfxCmP0dnwDn9DilY8&s=10" },
+      { id: 8, title: "Matcha Frappe", category: "Frappe", price: 175, badge: "Premium", img: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" },
+      { id: 9, title: "Unicorn Frappe", category: "Frappe", price: 190, badge: "Signature", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-oG6nWcwQ2RPgzvPdW_sF-i_AxkFjcTesfpOHp1KEw&s=10" },
+      { id: 10, title: "Sea Salt Matcha", category: "Matcha Series", price: 175, badge: "Top Pick", img: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" },
+      { id: 11, title: "Matcha Banana Pudding", category: "Matcha Series", price: 200, badge: "Special", img: "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?auto=format&fit=crop&w=600&q=80" },
+      { id: 12, title: "Strawberry Matcha", category: "Matcha Series", price: 170, badge: "Favorite", img: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" },
+      { id: 13, title: "Ube Matcha", category: "Matcha Series", price: 175, badge: "Specialty", img: "https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&w=600&q=80" },
+      { id: 14, title: "Dirty Matcha", category: "Matcha Series", price: 165, badge: "Espresso", img: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80" },
+      { id: 15, title: "Matcha Latte", category: "Matcha Series", price: 150, badge: "Classic", img: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" },
+      { id: 16, title: "Strawberry Milk", category: "Non Coffee", price: 149, badge: "Cold", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+      { id: 17, title: "Hot Chocolate", category: "Non Coffee", price: 159, badge: "Warm", img: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80" },
+      { id: 18, title: "Biscoff Milk", category: "Non Coffee", price: 159, badge: "Sweet", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" },
+      { id: 19, title: "Caramel Macchiato", category: "Coffee", price: 159, badge: "Bestseller", img: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80" },
+      { id: 20, title: "Sea Salt Latte", category: "Coffee", price: 149, badge: "Specialty", img: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80" },
+      { id: 21, title: "Vanilla Latte", category: "Coffee", price: 159, badge: "Classic", img: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80" },
+      { id: 22, title: "Hazelnut Latte", category: "Coffee", price: 159, badge: "Popular", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" },
+      { id: 23, title: "White Mocha", category: "Coffee", price: 179, badge: "Rich", img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" },
+      { id: 24, title: "Caramel Latte", category: "Coffee", price: 159, badge: "Smooth", img: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80" },
+      { id: 25, title: "Amerikano", category: "Coffee", price: 98, badge: "Black", img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" },
+      { id: 26, title: "Spanish Latte", category: "Coffee", price: 139, badge: "Signature", img: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80" },
+      { id: 27, title: "Cappuccino", category: "Coffee", price: 129, badge: "Foamy", img: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=600&q=80" },
+      { id: 28, title: "Mocha", category: "Coffee", price: 152, badge: "Choco", img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" },
+      { id: 29, title: "Carrot Cake", category: "Pastries & Desserts", price: 120, badge: "Cake", img: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=600&q=80" },
+      { id: 30, title: "Red Velvet Cake", category: "Pastries & Desserts", price: 125, badge: "Bestseller", img: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=600&q=80" },
+      { id: 31, title: "Chocolate Cake", category: "Pastries & Desserts", price: 132, badge: "Rich", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" },
+      { id: 32, title: "Banana Pudding", category: "Pastries & Desserts", price: 200, badge: "Special", img: "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?auto=format&fit=crop&w=600&q=80" },
+      { id: 33, title: "Dubai Chewy Cookie", category: "Pastries & Desserts", price: 129, badge: "Trending", img: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80" },
+      { id: 34, title: "Tiramisu", category: "Pastries & Desserts", price: 200, badge: "Italian", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80" },
+      { id: 35, title: "Cookies & Cream Croffles", category: "Pastries & Desserts", price: 170, badge: "Croffle", img: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80" },
+      { id: 36, title: "Classic Croffles", category: "Pastries & Desserts", price: 160, badge: "Croffle", img: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80" },
+      { id: 37, title: "Biscoff Croffles", category: "Pastries & Desserts", price: 180, badge: "Top", img: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80" },
+      { id: 38, title: "Truffles Pasta", category: "Snacks & Pasta", price: 199, badge: "Chef Special", img: "https://images.unsplash.com/photo-1621996346565-e3d5d6288338?auto=format&fit=crop&w=600&q=80" },
+      { id: 39, title: "Carbonara", category: "Snacks & Pasta", price: 199, badge: "Creamy", img: "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=600&q=80" },
+      { id: 40, title: "Baked Mac", category: "Snacks & Pasta", price: 199, badge: "Cheesy", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80" },
+      { id: 41, title: "Lasagna", category: "Snacks & Pasta", price: 210, badge: "Favorite", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80" },
+      { id: 42, title: "Tuna Aglio e Olio", category: "Snacks & Pasta", price: 189, badge: "Pasta", img: "https://images.unsplash.com/photo-1621996346565-e3d5d6288338?auto=format&fit=crop&w=600&q=80" },
+      { id: 43, title: "Garlic Bread (2pcs)", category: "Snacks & Pasta", price: 75, badge: "Side", img: "https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?auto=format&fit=crop&w=600&q=80" },
+      { id: 44, title: "Solo Fries", category: "Snacks & Pasta", price: 75, badge: "Crispy", img: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80" },
+      { id: 45, title: "Barkada Fries", category: "Snacks & Pasta", price: 150, badge: "Sharing", img: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80" },
+      { id: 46, title: "Barkada Nachos", category: "Snacks & Pasta", price: 280, badge: "Supreme", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80" }
+    ];
+
+    let reviews = [
+      { name: "Samantha Lee", rating: 5, comment: "The Biscoff Frappe and Carbonara are amazing!" },
+      { name: "Jerome Cruz", rating: 5, comment: "Crispy Croffles and Spanish Latte hit the spot!" }
+    ];
+
+    let cart = {};
+
+    function renderMenu(items) {
+      document.getElementById('menuGrid').innerHTML = items.map(i => `
+        <div class="card">
+          <div class="card-img">
+            <span class="card-badge">${i.badge}</span>
+            <img src="${i.img}" alt="${i.title}">
+          </div>
+          <div class="card-body">
+            <span class="card-cat">${i.category}</span>
+            <h4 class="card-title">${i.title}</h4>
+            <div class="card-footer">
+              <span class="card-price">₱${i.price}</span>
+              <button class="btn-add" onclick="modifyCart(${i.id}, 1)">+ Add</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function modifyCart(id, qtyChange) {
+      if (!cart[id]) {
+        const item = menuData.find(m => m.id === id);
+        cart[id] = { ...item, qty: 0 };
+      }
+      cart[id].qty += qtyChange;
+      if (cart[id].qty <= 0) delete cart[id];
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      let totalCount = 0, totalPrice = 0, html = '';
+      Object.values(cart).forEach(item => {
+        totalCount += item.qty;
+        totalPrice += item.price * item.qty;
+        html += `
+          <div class="cart-row">
+            <div><strong>${item.title}</strong><br><small>₱${item.price} x ${item.qty}</small></div>
+            <div class="qty-box">
+              <button class="qty-btn" onclick="modifyCart(${item.id}, -1)">-</button>
+              <span>${item.qty}</span>
+              <button class="qty-btn" onclick="modifyCart(${item.id}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      });
+      document.getElementById('cartList').innerHTML = html || '<p style="font-size:0.8rem; color:var(--text-muted);">Basket is empty.</p>';
+      document.getElementById('cartCount').innerText = totalCount;
+      document.getElementById('cartTotal').innerText = `₱${totalPrice}`;
+      document.getElementById('modalTotal').innerText = `₱${totalPrice}`;
+      document.getElementById('checkoutBtn').disabled = totalCount === 0;
+    }
+
+    function filterCat(cat, btn) {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderMenu(cat === 'all' ? menuData : menuData.filter(i => i.category === cat));
+    }
+
+    function filterSearch() {
+      const q = document.getElementById('searchBox').value.toLowerCase();
+      renderMenu(menuData.filter(i => i.title.toLowerCase().includes(q) || i.category.toLowerCase().includes(q)));
+    }
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.sub-nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById('view-' + viewName).classList.add('active');
+      const navEl = document.getElementById('nav-' + viewName);
+      if (navEl) navEl.classList.add('active');
+      if (viewName === 'admin') renderAdminTable();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeBtn').innerText = isDark ? '🌙 Dark' : '☀️ Light';
+    }
+
+    function toggleModal(id, show) {
+      document.getElementById(id).classList.toggle('active', show);
+    }
+
+    function openCheckout() { toggleModal('checkoutModal', true); }
+
+    function completeOrder(e) {
+      e.preventDefault();
+      alert("Order placed successfully with Kremah Café!");
+      cart = {};
+      updateCartUI();
+      toggleModal('checkoutModal', false);
+      switchView('orders');
+    }
+
+    function submitReview(e) {
+      e.preventDefault();
+      reviews.unshift({
+        name: document.getElementById('revName').value,
+        rating: Number(document.getElementById('revRating').value),
+        comment: document.getElementById('revComment').value
+      });
+      renderReviews();
+      alert("Review posted!");
+      e.target.reset();
+    }
+
+    function renderReviews() {
+      document.getElementById('reviewsList').innerHTML = reviews.map(r => `
+        <div class="widget">
+          <strong>${r.name}</strong> <span style="color:var(--accent-amber);">${'⭐'.repeat(r.rating)}</span>
+          <p style="font-size:0.85rem; margin-top:6px;">${r.comment}</p>
+        </div>
+      `).join('');
+    }
+
+    function promptAdmin() {
+      if (prompt("Enter Admin PIN (Hint: 1234):") === "1234") {
+        switchView('admin');
+      } else {
+        alert("Incorrect PIN");
+      }
+    }
+
+    function addItem(e) {
+      e.preventDefault();
+      menuData.unshift({
+        id: Date.now(),
+        title: document.getElementById('addTitle').value,
+        category: document.getElementById('addCat').value,
+        price: Number(document.getElementById('addPrice').value),
+        badge: document.getElementById('addBadge').value,
+        img: document.getElementById('addImg').value
+      });
+      renderMenu(menuData);
+      renderAdminTable();
+      alert("Item added successfully!");
+      e.target.reset();
+    }
+
+    function renderAdminTable() {
+      document.getElementById('adminTable').innerHTML = menuData.map(i => `
+        <tr>
+          <td><strong>${i.title}</strong></td>
+          <td>${i.category}</td>
+          <td>₱${i.price}</td>
+          <td><button class="btn-del" onclick="deleteItem(${i.id})">Delete</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function deleteItem(id) {
+      if (confirm("Delete this menu item?")) {
+        menuData = menuData.filter(i => i.id !== id);
+        renderMenu(menuData);
+        renderAdminTable();
+      }
+    }
+
+    // Initialize
+    renderMenu(menuData);
+    renderReviews();
+    updateCartUI();
+  </script>
+</body>
 </html>
