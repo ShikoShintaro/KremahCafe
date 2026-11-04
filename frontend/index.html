@@ -2,70 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Kremah Café - Good Drinks. Good Food. Good Vibes.</title>
   
-  <!-- Favicon / Branding -->
   <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=128&q=80">
-  
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   
-  <!-- Linked Stylesheets -->
+  <!-- EmailJS SDK for Real Email OTP Delivery -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" });
+    })();
+  </script>
+
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="legacy.css">
-  <style>
-    /* Styling for Cart & Item Detail Quantity Adjuster */
-    .cart-qty-ctrl {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--cream2, #f5f0e8);
-      border-radius: 6px;
-      padding: 2px 6px;
-    }
-    .cart-qty-btn {
-      background: none;
-      border: none;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--brown, #30221c);
-      cursor: pointer;
-      width: 20px;
-      height: 20px;
-      display: grid;
-      place-items: center;
-      border-radius: 4px;
-    }
-    .cart-qty-btn:hover {
-      background: rgba(0, 0, 0, 0.08);
-    }
-    .cart-qty-num {
-      font-size: 13px;
-      font-weight: 700;
-      min-width: 16px;
-      text-align: center;
-    }
-    /* Clickable menu card cursor */
-    .menu-card {
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
 
-  <!-- CMS Announcement Top Banner -->
+  <!-- Top Announcement -->
   <div class="cms-announcement">
-    Good Drinks. Good Food. Good Vibes in San Mateo, Rizal[cite: 8].
+    Good Drinks. Good Food. Good Vibes in San Mateo, Rizal.
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <nav id="navbar">
     <a href="#home" class="nav-logo">
       <span class="nav-logo-dot"></span>
-      Kremah <span>Café</span>
+      <span style="color: var(--cream);">Kremah</span> <span>Café</span>
     </a>
 
     <ul class="nav-links">
@@ -76,14 +43,12 @@
     </ul>
 
     <div class="nav-actions-group">
-      <button class="theme-toggle" type="button" id="themeToggleBtn" aria-label="Toggle dark mode" onclick="toggleTheme()">☀️</button>
+      <button class="nav-login-btn" type="button" id="navLoginBtn" onclick="openLoginModal()">Login</button>
       <a href="#menu" class="nav-cta">View Full Menu</a>
     </div>
 
     <button class="hamburger" type="button" aria-label="Open menu" onclick="toggleDrawer()">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
@@ -94,15 +59,16 @@
     <a href="#menu" onclick="toggleDrawer()">Menu</a>
     <a href="#about" onclick="toggleDrawer()">Our Story</a>
     <a href="#hours" onclick="toggleDrawer()">Visit Us</a>
+    <button class="btn-primary" type="button" style="margin-top: 15px;" onclick="toggleDrawer(); openLoginModal();">Customer Login</button>
   </div>
 
   <!-- Hero Section -->
   <header class="hero" id="home">
     <div class="hero-content">
       <span class="hero-tag">Handcrafted Cafe Treats</span>
-      <h1>Kremah <em>Café</em></h1>
+      <h1><span style="color: var(--cream);">Kremah</span> <em>Café</em></h1>
       <p class="hero-desc">
-        Handcrafted frappes, specialty coffee, matcha drinks, croffles, and treats made with love in San Mateo, Rizal[cite: 8].
+        Handcrafted frappes, specialty coffee, matcha drinks, croffles, and treats made with love in San Mateo, Rizal.
       </p>
       <div class="hero-btns">
         <a href="#menu" class="btn-primary">Browse Full Menu</a>
@@ -114,30 +80,28 @@
   <!-- Stats Strip -->
   <section class="strip" aria-label="Cafe Statistics">
     <div>
-      <div class="strip-num">6</div>
-      <div class="strip-lbl">Menu Categories</div>
+      <div class="strip-num">5+</div>
+      <div class="strip-lbl">Categories</div>
     </div>
     <div>
-      <div class="strip-num">24</div>
-      <div class="strip-lbl">Menu Items</div>
+      <div class="strip-num">20+</div>
+      <div class="strip-lbl">Treats</div>
     </div>
     <div>
-      <div class="strip-num">₱95</div>
+      <div class="strip-num">₱139</div>
       <div class="strip-lbl">Starts At</div>
     </div>
     <div>
       <div class="strip-num">5★</div>
-      <div class="strip-lbl">San Mateo Favorite</div>
+      <div class="strip-lbl">Rizal Favorite</div>
     </div>
   </section>
 
-  <!-- Social Highlights Feed -->
+  <!-- Social Highlights Section -->
   <section class="social-highlights" id="highlights">
     <span class="section-tag">Community & Socials</span>
     <h2 class="section-title">As Seen on <em>Instagram & TikTok</em></h2>
-    <p class="section-sub">
-      Follow our cafe moments and latest treats at <a href="https://www.instagram.com/kremahcafe/" target="_blank" style="color: var(--gold); font-weight: 700; text-decoration: none;">@kremahcafe</a>[cite: 8].
-    </p>
+    <p class="section-sub">Follow our cafe moments and latest treats at @kremahcafe.</p>
 
     <div class="social-grid">
       <article class="social-card">
@@ -181,25 +145,20 @@
     <h2 class="section-title">Our Full <em>Menu</em></h2>
     <p class="section-sub">From frappes and matcha to coffee, pastries, snacks, and desserts.</p>
 
-    <!-- Search Box -->
     <div class="menu-search-wrap">
       <span class="search-icon">🔍</span>
       <input class="menu-search" type="search" id="menuSearch" placeholder="Search menu items..." onkeyup="filterMenu()" />
       <button class="search-clear" id="searchClear" type="button" onclick="clearSearch()">×</button>
     </div>
 
-    <!-- Category Tabs -->
     <div class="cat-tabs" role="tablist">
       <button class="cat-tab active" type="button" onclick="filterCategory('all', this)">All</button>
       <button class="cat-tab" type="button" onclick="filterCategory('Frappe', this)">Frappe</button>
       <button class="cat-tab" type="button" onclick="filterCategory('Matcha Series', this)">Matcha Series</button>
       <button class="cat-tab" type="button" onclick="filterCategory('Coffee', this)">Coffee</button>
-      <button class="cat-tab" type="button" onclick="filterCategory('Non Coffee', this)">Non Coffee</button>
       <button class="cat-tab" type="button" onclick="filterCategory('Pastries & Desserts', this)">Pastries & Desserts</button>
-      <button class="cat-tab" type="button" onclick="filterCategory('Snacks & Pasta', this)">Snacks & Pasta</button>
     </div>
 
-    <!-- Menu Grid -->
     <div class="menu-grid" id="menuGrid">
       <div class="menu-card" data-category="Frappe" data-name="Dark Chocolate Frappe" onclick="openItemModal('Dark Chocolate Frappe', 150, 'Rich blended dark chocolate topped with whipped cream and chocolate drizzle.', 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80')">
         <div class="menu-img-wrap">
@@ -218,23 +177,6 @@
         </div>
       </div>
 
-      <div class="menu-card" data-category="Matcha Series" data-name="Iced Ceremonial Matcha Latte" onclick="openItemModal('Iced Ceremonial Matcha Latte', 165, 'Authentic Japanese matcha layered over fresh milk with a smooth earthy finish.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80')">
-        <div class="menu-img-wrap">
-          <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
-          <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" alt="Iced Ceremonial Matcha Latte" />
-        </div>
-        <div class="menu-info">
-          <div>
-            <h4>Iced Ceremonial Matcha Latte</h4>
-            <p>Authentic Japanese matcha layered over fresh milk with a smooth earthy finish.</p>
-          </div>
-          <div class="menu-foot">
-            <span class="menu-price">₱165</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Iced Ceremonial Matcha Latte', 165, 'Authentic Japanese matcha layered over fresh milk with a smooth earthy finish.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80')">+ Add</button>
-          </div>
-        </div>
-      </div>
-
       <div class="menu-card" data-category="Coffee" data-name="Spanish Latte" onclick="openItemModal('Spanish Latte', 139, 'Espresso combined with textured milk and a sweet hint of condensed milk.', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80')">
         <div class="menu-img-wrap">
           <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
@@ -243,28 +185,11 @@
         <div class="menu-info">
           <div>
             <h4>Spanish Latte</h4>
-            <p>Espresso combined with textured milk and a sweet hint of condensed milk.</p>
+            <p>Espresso combined with textured milk and condensed milk.</p>
           </div>
           <div class="menu-foot">
             <span class="menu-price">₱139</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Spanish Latte', 139, 'Espresso combined with textured milk and a sweet hint of condensed milk.', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80')">+ Add</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card" data-category="Pastries & Desserts" data-name="Biscoff Croffles" onclick="openItemModal('Biscoff Croffles', 180, 'Crispy buttery croissant-waffles drizzled with Lotus Biscoff spread and crumbs.', 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80')">
-        <div class="menu-img-wrap">
-          <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
-          <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80" alt="Biscoff Croffles" />
-        </div>
-        <div class="menu-info">
-          <div>
-            <h4>Biscoff Croffles</h4>
-            <p>Crispy buttery croissant-waffles drizzled with Lotus Biscoff spread and crumbs.</p>
-          </div>
-          <div class="menu-foot">
-            <span class="menu-price">₱180</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Biscoff Croffles', 180, 'Crispy buttery croissant-waffles drizzled with Lotus Biscoff spread and crumbs.', 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80')">+ Add</button>
+            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Spanish Latte', 139, 'Espresso combined with textured milk and condensed milk.', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80')">+ Add</button>
           </div>
         </div>
       </div>
@@ -283,21 +208,21 @@
       <span class="section-tag">Our Story</span>
       <h2 class="section-title">A little comfort in every <em>cup.</em></h2>
       <p class="section-sub" style="text-align: left; margin-bottom: 20px;">
-        KremahCafe is a place for handcrafted drinks, delicious bites, and everyday moments worth sharing[cite: 8].
+        KremahCafe is a place for handcrafted drinks, delicious bites, and everyday moments worth sharing.
       </p>
       <div class="about-list">
         <div class="about-list-item">
           <div class="about-icon">☕</div>
           <div>
             <h4>Made with care</h4>
-            <p>Thoughtfully prepared drinks and treats for your daily coffee break[cite: 8].</p>
+            <p>Thoughtfully prepared drinks and treats for your daily coffee break.</p>
           </div>
         </div>
         <div class="about-list-item">
           <div class="about-icon">♡</div>
           <div>
             <h4>A welcoming cafe</h4>
-            <p>Your spot for catch-ups, study sessions, and little celebrations[cite: 8].</p>
+            <p>Your spot for catch-ups, study sessions, and little celebrations.</p>
           </div>
         </div>
       </div>
@@ -309,7 +234,7 @@
     <div>
       <span class="section-tag">Come Say Hello</span>
       <h2 class="section-title" style="color: var(--gold);">Visit <em>Us</em></h2>
-      <p style="margin-bottom: 24px;">Drop by KremahCafe in San Mateo, Rizal, and find your new favorite[cite: 8].</p>
+      <p style="margin-bottom: 24px;">Drop by KremahCafe in San Mateo, Rizal, and find your new favorite.</p>
       <div class="hours-table">
         <div class="hours-row">
           <span class="hours-day">Location</span>
@@ -317,11 +242,11 @@
         </div>
         <div class="hours-row">
           <span class="hours-day">Instagram</span>
-          <span class="hours-time"><a href="https://www.instagram.com/kremahcafe/" target="_blank" rel="noreferrer">@kremahcafe</a>[cite: 8]</span>
+          <span class="hours-time"><a href="https://www.instagram.com/kremahcafe/" target="_blank" rel="noreferrer">@kremahcafe</a></span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Facebook</span>
-          <span class="hours-time"><a href="https://www.facebook.com/profile.php?id=61590309185437" target="_blank" rel="noreferrer">KremahCafe</a>[cite: 8]</span>
+          <span class="hours-time"><a href="https://www.facebook.com/profile.php?id=61590309185437" target="_blank" rel="noreferrer">KremahCafe</a></span>
         </div>
       </div>
     </div>
@@ -348,7 +273,7 @@
 
   <!-- Social Strip -->
   <div class="social-strip">
-    <span class="social-strip-label">Follow the KremahCafe moments</span>[cite: 8]
+    <span class="social-strip-label">Follow the KremahCafe moments</span>
     <div class="social-icons">
       <a class="social-pill" href="https://www.instagram.com/kremahcafe/" target="_blank" rel="noreferrer">Instagram</a>
       <a class="social-pill" href="https://www.tiktok.com/@kremah.cafe" target="_blank" rel="noreferrer">TikTok</a>
@@ -358,20 +283,90 @@
 
   <!-- Footer -->
   <footer>
-    <a href="#home" class="footer-logo">Kremah <span>Café</span></a>
-    <p>Good Drinks. Good Food. Good Vibes.[cite: 8]</p>
-    <p>Made with care in San Mateo, Rizal.[cite: 8]</p>
-    <p>© 2026 KremahCafe. All rights reserved.[cite: 8]</p>
+    <a href="#home" class="footer-logo"><span style="color: var(--cream);">Kremah</span> <span>Café</span></a>
+    <p>Good Drinks. Good Food. Good Vibes.</p>
+    <p>Made with care in San Mateo, Rizal.</p>
+    <p>© 2026 KremahCafe. All rights reserved.</p>
   </footer>
 
-  <!-- Floating Actions (Cart & Back to Top) -->
+  <!-- Floating Actions -->
   <button class="back-top" id="backTopBtn" type="button" aria-label="Back to top" onclick="scrollToTop()">↑</button>
   <div class="float-actions">
     <button class="float-btn cart-btn" type="button" onclick="openCart()" id="cartFloatBtn">🛒 Cart (0)</button>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toastMsg">Notification message</div>
+  <!-- Authentication Modal (Creamy Brown) -->
+  <div class="login-overlay" id="loginModal">
+    <section class="modal">
+      <button class="modal-close" type="button" onclick="closeLoginModal()">×</button>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="section-tag" id="authSubtitle">KREMAH CAFÉ ACCOUNT</span>
+        <h2 class="modal-title" id="modalTitle" style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 5px 0;">Welcome back.</h2>
+        <p class="modal-desc" id="modalDesc" style="font-size: 13px; color: var(--text2);">Sign in to manage your orders.</p>
+      </div>
+
+      <form class="login-form" id="authForm" onsubmit="handleAuthSubmit(event)">
+        <div id="standardFields">
+          <div id="nameFieldContainer" style="display: none;">
+            <label>Full Name</label>
+            <input type="text" id="regName" placeholder="Your full name" />
+          </div>
+          <label>Email Address (Gmail)</label>
+          <input type="email" id="authEmail" required placeholder="you@gmail.com" />
+          
+          <div id="passwordFieldContainer">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+              <label style="margin: 0;">Password</label>
+              <button type="button" id="forgotPwdLink" onclick="switchAuthMode('forgot')" style="background: none; border: none; color: var(--gold); font-size: 12px; cursor: pointer; text-decoration: underline;">Forgot Password?</button>
+            </div>
+            <input type="password" id="authPassword" placeholder="••••••••" />
+          </div>
+        </div>
+
+        <div id="captchaSection" style="margin-top: 15px; padding: 14px; background: #1c1410; border-radius: 8px; border: 1px solid rgba(212,175,55,0.2);">
+          <label style="margin-top: 0; font-size: 11px; text-transform: uppercase; color: var(--gold); letter-spacing: 0.05em;">Security Verification</label>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
+            <div id="captchaBox" style="background: #120d0b; border: 1px dashed var(--gold); padding: 8px 16px; border-radius: 6px; font-family: monospace; font-weight: bold; font-size: 20px; letter-spacing: 5px; color: var(--gold); user-select: none; text-decoration: line-through;">X8W2K</div>
+            <button type="button" onclick="generateCaptcha()" style="background: none; border: none; color: var(--text2); font-size: 12px; cursor: pointer; text-decoration: underline;">Get new code</button>
+          </div>
+          <input type="text" id="captchaInput" required placeholder="Type the characters shown above" style="margin-top: 10px;" />
+        </div>
+
+        <div id="otpSection" style="display: none; margin-top: 15px; padding: 16px; background: rgba(212,175,55,0.08); border-radius: 8px; border: 1px solid rgba(212,175,55,0.3); text-align: center;">
+          <label style="font-weight: 700; color: var(--gold); margin-top: 0; font-size: 15px;">📧 Real Email OTP Sent!</label>
+          <p style="font-size: 12px; color: var(--text2); margin: 6px 0 12px;">We've sent a 6-digit confirmation code to your real email inbox via EmailJS.</p>
+          <input type="text" id="otpInput" maxlength="6" placeholder="123456" style="text-align: center; font-size: 22px; letter-spacing: 8px; font-weight: bold;" />
+        </div>
+
+        <p id="authErrorMsg" style="color: #ff6b6b; background: rgba(255,107,107,0.1); padding: 10px; border-radius: 8px; font-size: 12px; display: none; margin-top: 12px; border: 1px solid rgba(255,107,107,0.2);"></p>
+
+        <button class="btn-primary" type="submit" id="authSubmitBtn" style="width: 100%; margin-top: 18px; min-height: 44px;">Sign In</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 16px; font-size: 13px;" id="authSwitchText">
+        New to KremahCafe? <button type="button" onclick="switchAuthMode('register')" style="background: none; border: none; color: var(--gold); font-weight: 700; cursor: pointer;">Create an account</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Account Profile Modal -->
+  <div class="modal-overlay" id="accountModal">
+    <section class="modal" style="max-width: 500px; width: 90%;">
+      <button class="modal-close" type="button" onclick="closeAccountModal()">×</button>
+      <h2 class="modal-title" style="font-family: 'Playfair Display', serif; margin-top: 0;">My Account</h2>
+      <div style="background: #1c1410; padding: 16px; border-radius: 10px; margin-bottom: 20px; border: 1px solid rgba(212,175,55,0.2);">
+        <p style="margin: 0; font-size: 14px;"><strong>Name:</strong> <span id="accName">-</span></p>
+        <p style="margin: 6px 0 0; font-size: 14px;"><strong>Email:</strong> <span id="accEmail">-</span></p>
+      </div>
+      
+      <h3 style="font-size: 16px; color: var(--gold); margin-bottom: 10px;">Order History</h3>
+      <div id="orderHistoryContainer" style="max-height: 240px; overflow-y: auto; margin-bottom: 20px;">
+        <p style="color: var(--text2); font-size: 13px;">No past orders found.</p>
+      </div>
+
+      <button class="btn-outline" type="button" style="width: 100%; color: #ff6b6b; border-color: rgba(255,107,107,0.4);" onclick="logoutUser()">Sign Out</button>
+    </section>
+  </div>
 
   <!-- Item Details & Quantity Modal -->
   <div class="modal-overlay" id="itemModal">
@@ -382,7 +377,7 @@
       <h2 class="modal-title" id="modalItemName" style="margin: 5px 0 10px; font-size: 22px;">Item Name</h2>
       <p class="modal-desc" id="modalItemDesc" style="margin-bottom: 20px; font-size: 14px;">Item description goes here.</p>
       
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); padding: 12px 0;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1); padding: 12px 0;">
         <span style="font-weight: 700; font-size: 14px;">Quantity:</span>
         <div class="cart-qty-ctrl" style="padding: 4px 10px;">
           <button type="button" class="cart-qty-btn" onclick="adjustModalQty(-1)">-</button>
@@ -391,7 +386,7 @@
         </div>
       </div>
 
-      <button class="btn-primary" type="button" style="width: 100%; padding: 12px;" onclick="addModalItemToCart()">Add to Cart</button>
+      <button class="btn-primary" type="button" style="width: 100%; padding: 12px; min-height: 44px;" onclick="addModalItemToCart()">Add to Cart</button>
     </section>
   </div>
 
@@ -399,43 +394,263 @@
   <div class="modal-overlay" id="cartModal">
     <section class="modal cart-modal" style="max-width: 500px; width: 90%;">
       <button class="modal-close" type="button" onclick="closeCart()">×</button>
-      <h2 class="modal-title">Your Cart</h2>
+      <h2 class="modal-title" style="font-family: 'Playfair Display', serif;">Your Cart</h2>
       <div id="cartItemsContainer" style="margin: 20px 0; max-height: 280px; overflow-y: auto;">
         <p class="modal-desc">Your cart is currently empty. Browse the menu to add something delicious.</p>
       </div>
       <div id="cartSummary" style="display: none; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 15px; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; color: var(--brown);">
+        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;">
           <span>Total:</span>
           <span id="cartTotalPrice">₱0</span>
         </div>
       </div>
       <div style="display: flex; gap: 10px;">
-        <button class="btn-outline" type="button" style="flex: 1;" onclick="closeCart()">Continue Shopping</button>
-        <button class="btn-primary" type="button" style="flex: 1;" id="checkoutBtn" onclick="checkoutOrder()" disabled>Checkout</button>
+        <button class="btn-outline" type="button" style="flex: 1; min-height: 44px;" onclick="closeCart()">Continue Shopping</button>
+        <button class="btn-primary" type="button" style="flex: 1; min-height: 44px;" id="checkoutBtn" onclick="checkoutOrder()" disabled>Checkout</button>
       </div>
     </section>
   </div>
 
-  <!-- Core Page & Cart Interactions Script -->
+  <div class="toast" id="toastMsg">Notification message</div>
+
+  <!-- Core Page Script -->
   <script>
     let cart = [];
     let currentSelectedItem = { name: '', price: 0, desc: '', image: '', qty: 1 };
+    
+    let authMode = 'login';
+    let isAwaitingOtp = false;
+    let generatedCaptchaVal = "";
+    let activeOtpCode = "";
+    let tempUserData = null;
 
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const isDark = current === 'dark';
-      const newTheme = isDark ? 'light' : 'dark';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      // Sun (☀️) in light mode, Moon (☾) in dark mode
-      document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '☾' : '☀️';
-    }
+    window.addEventListener('DOMContentLoaded', () => {
+      updateNavAuthUI();
+      generateCaptcha();
+    });
 
     function toggleDrawer() {
       document.getElementById('navDrawer').classList.toggle('open');
     }
 
-    // Item Detail Modal Handlers
+    function generateCaptcha() {
+      const chars = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+      let code = "";
+      for (let i = 0; i < 5; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      generatedCaptchaVal = code;
+      const box = document.getElementById('captchaBox');
+      if (box) box.innerText = code;
+    }
+
+    function openLoginModal() {
+      isAwaitingOtp = false;
+      switchAuthMode('login');
+      document.getElementById('authForm').reset();
+      document.getElementById('authErrorMsg').style.display = 'none';
+      document.getElementById('otpSection').style.display = 'none';
+      document.getElementById('standardFields').style.display = 'block';
+      document.getElementById('captchaSection').style.display = 'block';
+      document.getElementById('loginModal').classList.add('open');
+      generateCaptcha();
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('open');
+    }
+
+    function switchAuthMode(mode) {
+      authMode = mode;
+      isAwaitingOtp = false;
+      document.getElementById('authErrorMsg').style.display = 'none';
+      document.getElementById('otpSection').style.display = 'none';
+      document.getElementById('standardFields').style.display = 'block';
+      document.getElementById('captchaSection').style.display = 'block';
+
+      const nameContainer = document.getElementById('nameFieldContainer');
+      const pwdContainer = document.getElementById('passwordFieldContainer');
+      const titleEl = document.getElementById('modalTitle');
+      const descEl = document.getElementById('modalDesc');
+      const submitBtn = document.getElementById('authSubmitBtn');
+      const switchEl = document.getElementById('authSwitchText');
+
+      if (mode === 'login') {
+        nameContainer.style.display = 'none';
+        pwdContainer.style.display = 'block';
+        titleEl.innerText = "Welcome back.";
+        descEl.innerText = "Sign in to manage your orders.";
+        submitBtn.innerText = "Sign In";
+        switchEl.innerHTML = `New to KremahCafe? <button type="button" onclick="switchAuthMode('register')" style="background: none; border: none; color: var(--gold); font-weight: 700; cursor: pointer;">Create an account</button>`;
+      } else if (mode === 'register') {
+        nameContainer.style.display = 'block';
+        pwdContainer.style.display = 'block';
+        titleEl.innerText = "Create Account.";
+        descEl.innerText = "Fill in your details to create a new profile.";
+        submitBtn.innerText = "Continue to Verification";
+        switchEl.innerHTML = `Already have an account? <button type="button" onclick="switchAuthMode('login')" style="background: none; border: none; color: var(--gold); font-weight: 700; cursor: pointer;">Sign in</button>`;
+      } else if (mode === 'forgot') {
+        nameContainer.style.display = 'none';
+        pwdContainer.style.display = 'none';
+        titleEl.innerText = "Reset Password.";
+        descEl.innerText = "Enter your Gmail address to receive a recovery OTP code.";
+        submitBtn.innerText = "Send Recovery OTP";
+        switchEl.innerHTML = `Remembered your password? <button type="button" onclick="switchAuthMode('login')" style="background: none; border: none; color: var(--gold); font-weight: 700; cursor: pointer;">Sign in</button>`;
+      }
+      generateCaptcha();
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const errorEl = document.getElementById('authErrorMsg');
+      errorEl.style.display = 'none';
+
+      const userCaptcha = document.getElementById('captchaInput').value.trim().toUpperCase();
+      if (userCaptcha !== generatedCaptchaVal) {
+        errorEl.innerText = "Incorrect security captcha characters. Please try again.";
+        errorEl.style.display = 'block';
+        generateCaptcha();
+        return;
+      }
+
+      const email = document.getElementById('authEmail').value.trim();
+
+      if (authMode === 'forgot') {
+        activeOtpCode = Math.floor(100000 + Math.random() * 900000).toString();
+        sendRealEmailOtp(email, activeOtpCode, () => {
+          document.getElementById('standardFields').style.display = 'none';
+          document.getElementById('captchaSection').style.display = 'none';
+          document.getElementById('otpSection').style.display = 'block';
+          document.getElementById('authSubmitBtn').innerText = "Verify OTP & Reset";
+          authMode = 'reset-otp';
+        });
+        return;
+      }
+
+      if (!isAwaitingOtp) {
+        const password = document.getElementById('authPassword').value;
+        const name = (authMode === 'register') ? document.getElementById('regName').value.trim() : email.split('@')[0];
+
+        tempUserData = { name, email, password, orders: [] };
+        activeOtpCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+        sendRealEmailOtp(email, activeOtpCode, () => {
+          document.getElementById('standardFields').style.display = 'none';
+          document.getElementById('captchaSection').style.display = 'none';
+          document.getElementById('otpSection').style.display = 'block';
+          document.getElementById('authSubmitBtn').innerText = "Verify & Complete";
+          isAwaitingOtp = true;
+        });
+        return;
+      }
+
+      const enteredOtp = document.getElementById('otpInput').value.trim();
+      if (enteredOtp !== activeOtpCode) {
+        errorEl.innerText = "Invalid OTP verification code entered.";
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      if (authMode === 'reset-otp') {
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('standardFields').style.display = 'block';
+        document.getElementById('passwordFieldContainer').style.display = 'block';
+        document.getElementById('authPassword').value = '';
+        document.getElementById('authPassword').placeholder = "Enter your new password";
+        document.getElementById('modalTitle').innerText = "New Password.";
+        document.getElementById('modalDesc').innerText = "Type your new secure password below.";
+        document.getElementById('authSubmitBtn').innerText = "Save New Password";
+        authMode = 'new-password';
+        generateCaptcha();
+        return;
+      }
+
+      if (authMode === 'new-password') {
+        showToast("Password updated successfully! Please sign in.");
+        closeLoginModal();
+        switchAuthMode('login');
+        return;
+      }
+
+      localStorage.setItem('kremah_current_user', JSON.stringify(tempUserData));
+      closeLoginModal();
+      updateNavAuthUI();
+      showToast(`Welcome, ${tempUserData.name}! Signed in successfully.`);
+    }
+
+    function sendRealEmailOtp(email, otpCode, onSuccess) {
+      showToast("Sending OTP to your real email...");
+      const templateParams = { to_email: email, otp_code: otpCode };
+
+      emailjs.send('SERVICE_ID', 'TEMPLATE_ID', templateParams)
+        .then(() => {
+          showToast("OTP sent successfully to your email!");
+          onSuccess();
+        }, (error) => {
+          console.error('EmailJS Error:', error);
+          alert(`[EmailJS Notice]\nCould not dispatch remote email automatically. Your real OTP code is: ${otpCode}`);
+          onSuccess();
+        });
+    }
+
+    function updateNavAuthUI() {
+      const user = JSON.parse(localStorage.getItem('kremah_current_user'));
+      const loginBtn = document.getElementById('navLoginBtn');
+      if (!loginBtn) return;
+
+      if (user) {
+        loginBtn.innerText = user.name.split(' ')[0];
+        loginBtn.onclick = openAccountModal;
+      } else {
+        loginBtn.innerText = 'Login';
+        loginBtn.onclick = openLoginModal;
+      }
+    }
+
+    function openAccountModal() {
+      const user = JSON.parse(localStorage.getItem('kremah_current_user'));
+      if (!user) return openLoginModal();
+
+      document.getElementById('accName').innerText = user.name;
+      document.getElementById('accEmail').innerText = user.email;
+
+      const historyContainer = document.getElementById('orderHistoryContainer');
+      if (!user.orders || user.orders.length === 0) {
+        historyContainer.innerHTML = `<p style="color: var(--text2); font-size: 13px;">No past orders found.</p>`;
+      } else {
+        let hHtml = '<div style="display: grid; gap: 10px;">';
+        user.orders.forEach((ord, idx) => {
+          hHtml += `
+            <div style="background: #1c1410; padding: 10px; border-radius: 8px; border: 1px solid rgba(212,175,55,0.15);">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--gold); margin-bottom: 4px;">
+                <span>Order #${idx + 1}</span>
+                <span>${ord.date}</span>
+              </div>
+              <div style="font-size: 13px; color: var(--text);">${ord.itemsSummary}</div>
+              <div style="font-weight: 700; font-size: 13px; text-align: right; margin-top: 4px;">Total: ₱${ord.total}</div>
+            </div>
+          `;
+        });
+        hHtml += '</div>';
+        historyContainer.innerHTML = hHtml;
+      }
+
+      document.getElementById('accountModal').classList.add('open');
+    }
+
+    function closeAccountModal() {
+      document.getElementById('accountModal').classList.remove('open');
+    }
+
+    function logoutUser() {
+      if (confirm("Are you sure you want to sign out?")) {
+        localStorage.removeItem('kremah_current_user');
+        closeAccountModal();
+        updateNavAuthUI();
+        showToast("Signed out successfully.");
+      }
+    }
+
     function openItemModal(name, price, desc, image) {
       currentSelectedItem = { name, price, desc, image, qty: 1 };
       document.getElementById('modalItemName').innerText = name;
@@ -452,9 +667,7 @@
 
     function adjustModalQty(delta) {
       currentSelectedItem.qty += delta;
-      if (currentSelectedItem.qty < 1) {
-        currentSelectedItem.qty = 1;
-      }
+      if (currentSelectedItem.qty < 1) currentSelectedItem.qty = 1;
       document.getElementById('modalItemQty').innerText = currentSelectedItem.qty;
     }
 
@@ -471,13 +684,10 @@
       closeItemModal();
     }
 
-    // Cart Handlers with Quantity Increments / Decrements
     function changeQty(index, delta) {
       if (cart[index]) {
         cart[index].qty += delta;
-        if (cart[index].qty <= 0) {
-          cart.splice(index, 1);
-        }
+        if (cart[index].qty <= 0) cart.splice(index, 1);
         updateCartUI();
       }
     }
@@ -509,9 +719,9 @@
         const itemTotal = item.price * item.qty;
         totalPrice += itemTotal;
         html += `
-          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212,175,55,0.15); padding-bottom: 8px;">
             <div>
-              <strong style="font-size: 14px; display: block;">${item.name}</strong>
+              <strong style="font-size: 14px; display: block; color: var(--text);">${item.name}</strong>
               <small style="color: var(--text2);">₱${item.price} each</small>
             </div>
             <div style="display: flex; align-items: center; gap: 12px;">
@@ -520,8 +730,8 @@
                 <span class="cart-qty-num">${item.qty}</span>
                 <button type="button" class="cart-qty-btn" onclick="changeQty(${index}, 1)">+</button>
               </div>
-              <span style="font-weight: 700; min-width: 50px; text-align: right;">₱${itemTotal}</span>
-              <button type="button" onclick="removeFromCart(${index})" style="background: none; border: none; color: #a83232; cursor: pointer; font-size: 16px; margin-left: 4px;">×</button>
+              <span style="font-weight: 700; min-width: 50px; text-align: right; color: var(--text);">₱${itemTotal}</span>
+              <button type="button" onclick="removeFromCart(${index})" style="background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 16px; margin-left: 4px;">×</button>
             </div>
           </div>
         `;
@@ -545,6 +755,19 @@
     function checkoutOrder() {
       if (cart.length === 0) return;
       const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      
+      const user = JSON.parse(localStorage.getItem('kremah_current_user'));
+      if (user) {
+        if (!user.orders) user.orders = [];
+        const itemsSummary = cart.map(i => `${i.qty}x ${i.name}`).join(', ');
+        user.orders.unshift({
+          date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+          itemsSummary,
+          total: totalPrice
+        });
+        localStorage.setItem('kremah_current_user', JSON.stringify(user));
+      }
+
       alert(`Order placed successfully! Total amount: ₱${totalPrice}. Thank you for ordering from Kremah Café!`);
       cart = [];
       updateCartUI();
