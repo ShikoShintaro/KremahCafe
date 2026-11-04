@@ -16,6 +16,43 @@
   <!-- Linked Stylesheets -->
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="legacy.css">
+  <style>
+    /* Styling for Cart & Item Detail Quantity Adjuster */
+    .cart-qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cream2, #f5f0e8);
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+    .cart-qty-btn {
+      background: none;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--brown, #30221c);
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 4px;
+    }
+    .cart-qty-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .cart-qty-num {
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 16px;
+      text-align: center;
+    }
+    /* Clickable menu card cursor */
+    .menu-card {
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -39,7 +76,7 @@
     </ul>
 
     <div class="nav-actions-group">
-      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" onclick="toggleTheme()">☾</button>
+      <button class="theme-toggle" type="button" id="themeToggleBtn" aria-label="Toggle dark mode" onclick="toggleTheme()">☀️</button>
       <a href="#menu" class="nav-cta">View Full Menu</a>
     </div>
 
@@ -164,7 +201,7 @@
 
     <!-- Menu Grid -->
     <div class="menu-grid" id="menuGrid">
-      <div class="menu-card" data-category="Frappe" data-name="Dark Chocolate Frappe">
+      <div class="menu-card" data-category="Frappe" data-name="Dark Chocolate Frappe" onclick="openItemModal('Dark Chocolate Frappe', 150, 'Rich blended dark chocolate topped with whipped cream and chocolate drizzle.', 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80')">
         <div class="menu-img-wrap">
           <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
           <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80" alt="Dark Chocolate Frappe" />
@@ -176,12 +213,12 @@
           </div>
           <div class="menu-foot">
             <span class="menu-price">₱150</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="addToCart('Dark Chocolate Frappe', 150)">+ Add</button>
+            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Dark Chocolate Frappe', 150, 'Rich blended dark chocolate topped with whipped cream and chocolate drizzle.', 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80')">+ Add</button>
           </div>
         </div>
       </div>
 
-      <div class="menu-card" data-category="Matcha Series" data-name="Iced Ceremonial Matcha Latte">
+      <div class="menu-card" data-category="Matcha Series" data-name="Iced Ceremonial Matcha Latte" onclick="openItemModal('Iced Ceremonial Matcha Latte', 165, 'Authentic Japanese matcha layered over fresh milk with a smooth earthy finish.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80')">
         <div class="menu-img-wrap">
           <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
           <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" alt="Iced Ceremonial Matcha Latte" />
@@ -193,12 +230,12 @@
           </div>
           <div class="menu-foot">
             <span class="menu-price">₱165</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="addToCart('Iced Ceremonial Matcha Latte', 165)">+ Add</button>
+            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Iced Ceremonial Matcha Latte', 165, 'Authentic Japanese matcha layered over fresh milk with a smooth earthy finish.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80')">+ Add</button>
           </div>
         </div>
       </div>
 
-      <div class="menu-card" data-category="Coffee" data-name="Spanish Latte">
+      <div class="menu-card" data-category="Coffee" data-name="Spanish Latte" onclick="openItemModal('Spanish Latte', 139, 'Espresso combined with textured milk and a sweet hint of condensed milk.', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80')">
         <div class="menu-img-wrap">
           <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
           <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Spanish Latte" />
@@ -210,12 +247,12 @@
           </div>
           <div class="menu-foot">
             <span class="menu-price">₱139</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="addToCart('Spanish Latte', 139)">+ Add</button>
+            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Spanish Latte', 139, 'Espresso combined with textured milk and a sweet hint of condensed milk.', 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80')">+ Add</button>
           </div>
         </div>
       </div>
 
-      <div class="menu-card" data-category="Pastries & Desserts" data-name="Biscoff Croffles">
+      <div class="menu-card" data-category="Pastries & Desserts" data-name="Biscoff Croffles" onclick="openItemModal('Biscoff Croffles', 180, 'Crispy buttery croissant-waffles drizzled with Lotus Biscoff spread and crumbs.', 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80')">
         <div class="menu-img-wrap">
           <button class="menu-fav" type="button" onclick="toggleFav(event, this)">♡</button>
           <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80" alt="Biscoff Croffles" />
@@ -227,7 +264,7 @@
           </div>
           <div class="menu-foot">
             <span class="menu-price">₱180</span>
-            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="addToCart('Biscoff Croffles', 180)">+ Add</button>
+            <button class="btn-primary" type="button" style="padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); openItemModal('Biscoff Croffles', 180, 'Crispy buttery croissant-waffles drizzled with Lotus Biscoff spread and crumbs.', 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80')">+ Add</button>
           </div>
         </div>
       </div>
@@ -336,12 +373,34 @@
   <!-- Toast Notification -->
   <div class="toast" id="toastMsg">Notification message</div>
 
+  <!-- Item Details & Quantity Modal -->
+  <div class="modal-overlay" id="itemModal">
+    <section class="modal" style="max-width: 450px; width: 90%; text-align: left;">
+      <button class="modal-close" type="button" onclick="closeItemModal()">×</button>
+      <img id="modalItemImg" src="" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;" />
+      <span class="section-tag" id="modalItemPrice" style="color: var(--gold); font-weight: 700;">₱0</span>
+      <h2 class="modal-title" id="modalItemName" style="margin: 5px 0 10px; font-size: 22px;">Item Name</h2>
+      <p class="modal-desc" id="modalItemDesc" style="margin-bottom: 20px; font-size: 14px;">Item description goes here.</p>
+      
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); padding: 12px 0;">
+        <span style="font-weight: 700; font-size: 14px;">Quantity:</span>
+        <div class="cart-qty-ctrl" style="padding: 4px 10px;">
+          <button type="button" class="cart-qty-btn" onclick="adjustModalQty(-1)">-</button>
+          <span class="cart-qty-num" id="modalItemQty" style="font-size: 16px; min-width: 24px;">1</span>
+          <button type="button" class="cart-qty-btn" onclick="adjustModalQty(1)">+</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" type="button" style="width: 100%; padding: 12px;" onclick="addModalItemToCart()">Add to Cart</button>
+    </section>
+  </div>
+
   <!-- Cart Modal -->
   <div class="modal-overlay" id="cartModal">
     <section class="modal cart-modal" style="max-width: 500px; width: 90%;">
       <button class="modal-close" type="button" onclick="closeCart()">×</button>
       <h2 class="modal-title">Your Cart</h2>
-      <div id="cartItemsContainer" style="margin: 20px 0; max-height: 250px; overflow-y: auto;">
+      <div id="cartItemsContainer" style="margin: 20px 0; max-height: 280px; overflow-y: auto;">
         <p class="modal-desc">Your cart is currently empty. Browse the menu to add something delicious.</p>
       </div>
       <div id="cartSummary" style="display: none; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 15px; margin-bottom: 20px;">
@@ -360,26 +419,67 @@
   <!-- Core Page & Cart Interactions Script -->
   <script>
     let cart = [];
+    let currentSelectedItem = { name: '', price: 0, desc: '', image: '', qty: 1 };
 
     function toggleTheme() {
       const current = document.documentElement.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      const isDark = current === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      // Sun (☀️) in light mode, Moon (☾) in dark mode
+      document.getElementById('themeToggleBtn').innerText = newTheme === 'dark' ? '☾' : '☀️';
     }
 
     function toggleDrawer() {
       document.getElementById('navDrawer').classList.toggle('open');
     }
 
-    // Cart & Checkout Handlers
-    function addToCart(name, price) {
+    // Item Detail Modal Handlers
+    function openItemModal(name, price, desc, image) {
+      currentSelectedItem = { name, price, desc, image, qty: 1 };
+      document.getElementById('modalItemName').innerText = name;
+      document.getElementById('modalItemPrice').innerText = `₱${price}`;
+      document.getElementById('modalItemDesc').innerText = desc;
+      document.getElementById('modalItemImg').src = image;
+      document.getElementById('modalItemQty').innerText = 1;
+      document.getElementById('itemModal').classList.add('open');
+    }
+
+    function closeItemModal() {
+      document.getElementById('itemModal').classList.remove('open');
+    }
+
+    function adjustModalQty(delta) {
+      currentSelectedItem.qty += delta;
+      if (currentSelectedItem.qty < 1) {
+        currentSelectedItem.qty = 1;
+      }
+      document.getElementById('modalItemQty').innerText = currentSelectedItem.qty;
+    }
+
+    function addModalItemToCart() {
+      const { name, price, qty } = currentSelectedItem;
       const existingItem = cart.find(item => item.name === name);
       if (existingItem) {
-        existingItem.qty += 1;
+        existingItem.qty += qty;
       } else {
-        cart.push({ name, price, qty: 1 });
+        cart.push({ name, price, qty });
       }
       updateCartUI();
-      showToast(`Added ${name} to cart!`);
+      showToast(`Added ${qty} × ${name} to cart!`);
+      closeItemModal();
+    }
+
+    // Cart Handlers with Quantity Increments / Decrements
+    function changeQty(index, delta) {
+      if (cart[index]) {
+        cart[index].qty += delta;
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+        updateCartUI();
+      }
     }
 
     function removeFromCart(index) {
@@ -412,11 +512,16 @@
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 8px;">
             <div>
               <strong style="font-size: 14px; display: block;">${item.name}</strong>
-              <small style="color: var(--text2);">₱${item.price} × ${item.qty}</small>
+              <small style="color: var(--text2);">₱${item.price} each</small>
             </div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-weight: 700;">₱${itemTotal}</span>
-              <button type="button" onclick="removeFromCart(${index})" style="background: none; border: none; color: #a83232; cursor: pointer; font-size: 16px;">×</button>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="cart-qty-ctrl">
+                <button type="button" class="cart-qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                <span class="cart-qty-num">${item.qty}</span>
+                <button type="button" class="cart-qty-btn" onclick="changeQty(${index}, 1)">+</button>
+              </div>
+              <span style="font-weight: 700; min-width: 50px; text-align: right;">₱${itemTotal}</span>
+              <button type="button" onclick="removeFromCart(${index})" style="background: none; border: none; color: #a83232; cursor: pointer; font-size: 16px; margin-left: 4px;">×</button>
             </div>
           </div>
         `;
