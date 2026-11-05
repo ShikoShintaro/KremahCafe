@@ -1,10 +1,21 @@
 
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'Admin/Admin/**/*',
+          dest: 'Admin/Admin'
+        }
+      ]
+    })
+  ],
 
   build: {
     rollupOptions: {
