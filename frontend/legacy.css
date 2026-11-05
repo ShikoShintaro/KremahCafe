@@ -3,11 +3,11 @@
   --brown-mid: #3D261D;
   --gold: #D4AF37;
   --gold-light: #F4E8C1;
-  --cream: #FDFBF7;
+  --cream: #b38d41;
   --cream2: #F5EDDF;
   --white: #FFFFFF;
-  --text: #2C221E;
-  --text2: #6A5B53;
+  --text: #e0925e;
+  --text2: #553927;
   --matcha: #6B8E23;
   --accent: #E07A5F;
   --shadow-soft: 0 10px 30px rgba(37, 22, 15, 0.08);
@@ -380,14 +380,14 @@ section {
 .section-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
-  color: var(--brown);
+  color: var(--gold);
   text-align: center;
   margin-bottom: 16px;
 }
 
 .section-sub {
   text-align: center;
-  color: var(--text2);
+  color: var(--white);
   max-width: 650px;
   margin: 0 auto 60px;
   font-size: 1.1rem;
@@ -395,7 +395,7 @@ section {
 
 /* ── SOCIAL MEDIA HIGHLIGHTS FEED ── */
 .social-highlights {
-  background: var(--cream2);
+  background: var(--brown-mid);
   padding: 90px 5%;
 }
 
@@ -536,7 +536,7 @@ section {
 }
 
 .cat-tab {
-  background: var(--white);
+  background: var(--gold-light);
   border: 1px solid rgba(37, 22, 15, 0.12);
   padding: 12px 24px;
   border-radius: 50px;
@@ -722,7 +722,7 @@ section {
 
 /* ── ABOUT SECTION ── */
 .about-section {
-  background: var(--white);
+  background: var(--brown-mid);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 60px;
@@ -761,7 +761,7 @@ section {
 }
 
 .about-icon {
-  background: var(--cream2);
+  background: var(--#3D3323);
   color: var(--gold);
   width: 50px;
   height: 50px;
@@ -777,13 +777,13 @@ section {
 .about-list-item h4 {
   font-family: 'Playfair Display', serif;
   font-size: 1.15rem;
-  color: var(--brown);
+  color: var(--white);
   margin-bottom: 4px;
 }
 
 .about-list-item p {
   font-size: 14px;
-  color: var(--text2);
+  color: var(--yellow);
 }
 
 /* ── HOURS & MAP SECTION ── */
@@ -975,7 +975,7 @@ footer a:hover {
 }
 
 .modal {
-  background: var(--white);
+  background: var(--#0B0707);
   width: 100%;
   max-width: 480px;
   border-radius: var(--radius-lg);
@@ -1017,7 +1017,7 @@ footer a:hover {
 .modal-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
-  color: var(--brown);
+  color: var(--cream);
   margin-bottom: 12px;
 }
 
