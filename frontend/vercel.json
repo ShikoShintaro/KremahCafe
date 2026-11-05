@@ -1,12 +1,20 @@
 {
-    "rewrites": [
-        {
-            "source": "/Admin/Admin",
-            "destination": "/Admin/Admin/index.html"
-        },
-        {
-            "source": "/Admin/Admin",
-            "destination": "/Admin/Admin/index.html"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/Admin/Admin",
+      "destination": "/Admin/Admin/index.html"
+    },
+    {
+      "source": "/Admin/Admin/",
+      "destination": "/Admin/Admin/index.html"
+    },
+    {
+      "source": "/admin/admin",
+      "destination": "/Admin/Admin/index.html"
+    },
+    {
+      "source": "/admin/admin/",
+      "destination": "/Admin/Admin/index.html"
+    }
+  ]
 }
