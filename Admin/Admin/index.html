@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Kremah Café</title>
+    <!-- Tailwind CSS CDN for rapid layout styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind.config.js"></script>
+    <!-- FontAwesome for Dashboard Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <div class="bg-[#e5c158] text-cafeDarker text-xs md:text-sm font-semibold text-center py-1.5 px-4 tracking-wide">
+        Good Drinks. Good Food. Good Vibes in San Mateo, Rizal. — <span class="underline">Admin Portal</span>
+    </div>
+
+    <!-- Main Header / Navigation -->
+    <header class="bg-cafeDarker border-b border-neutral-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo Text -->
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-cafeGold serif-heading text-xl md:text-2xl font-bold tracking-wider">
+                    Kremah Café
+                </a>
+                <span class="bg-neutral-800 text-cafeGold text-xs px-2 py-1 rounded font-mono">ADMIN</span>
+            </div>
+
+            <!-- Navigation Links (Repurposed for Admin Sections) -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <button type="button" data-action="switch-tab" data-tab="dashboard" id="nav-dashboard" class="text-cafeGold transition hover:text-cafeGold pb-1 border-b-2 border-cafeGold">Dashboard</button>
+                <button type="button" data-action="switch-tab" data-tab="orders" id="nav-orders" class="text-neutral-400 transition hover:text-cafeGold pb-1 border-b-2 border-transparent">Orders</button>
+                <button type="button" data-action="switch-tab" data-tab="menu" id="nav-menu" class="text-neutral-400 transition hover:text-cafeGold pb-1 border-b-2 border-transparent">Menu Management</button>
+                <button type="button" data-action="switch-tab" data-tab="users" id="nav-users" class="text-neutral-400 transition hover:text-cafeGold pb-1 border-b-2 border-transparent">Users</button>
+            </nav>
+
+            <label class="sr-only" for="mobile-nav">Admin section</label>
+            <select id="mobile-nav" class="md:hidden bg-neutral-900 border border-neutral-700 text-neutral-200 text-xs rounded px-2 py-2">
+                <option value="dashboard">Dashboard</option>
+                <option value="orders">Orders</option>
+                <option value="menu">Menu</option>
+                <option value="users">Users</option>
+            </select>
+
+            <!-- User / Action Buttons -->
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-2 text-sm text-neutral-300 bg-neutral-900 px-3 py-1.5 rounded-full border border-neutral-800">
+                    <i class="fa-solid fa-user-shield text-cafeGold"></i>
+                    <span>Demo Admin</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div class="bg-amber-900/30 border border-amber-700/60 text-amber-200 px-4 py-3 rounded mb-6 text-sm">
+            Demo dashboard: displayed records and changes are local examples and are not saved to the café system.
+        </div>
+
+        <!-- TAB 1: DASHBOARD OVERVIEW -->
+        <section id="tab-content-dashboard" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="serif-heading text-2xl md:text-3xl font-bold text-cafeGold">Admin Dashboard</h1>
+                    <p class="text-neutral-400 text-sm">Overview of daily operations and café performance metrics.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-xs text-neutral-400 bg-neutral-900 px-3 py-2 rounded border border-neutral-800">
+                        <i class="fa-regular fa-calendar-days text-cafeGold mr-1.5"></i> <span id="current-date">Nov 5, 2026</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Metrics Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-[#120f0d] p-5 rounded-lg border border-neutral-800 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-neutral-400">Today's Orders</p>
+                        <span class="p-2 bg-cafeGold/10 text-cafeGold rounded-md"><i class="fa-solid fa-bag-shopping"></i></span>
+                    </div>
+                    <p class="text-2xl font-bold text-white mt-2">24</p>
+                    <span class="text-xs text-emerald-400 mt-1 inline-block"><i class="fa-solid fa-arrow-up mr-1"></i> 12% vs yesterday</span>
+                </div>
+                <div class="bg-[#120f0d] p-5 rounded-lg border border-neutral-800 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-neutral-400">Total Revenue</p>
+                        <span class="p-2 bg-cafeGold/10 text-cafeGold rounded-md"><i class="fa-solid fa-peso-sign"></i></span>
+                    </div>
+                    <p class="text-2xl font-bold text-white mt-2">₱8,450.00</p>
+                    <span class="text-xs text-emerald-400 mt-1 inline-block"><i class="fa-solid fa-arrow-up mr-1"></i> 8% increase</span>
+                </div>
+                <div class="bg-[#120f0d] p-5 rounded-lg border border-neutral-800 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-neutral-400">Active Menu Items</p>
+                        <span class="p-2 bg-cafeGold/10 text-cafeGold rounded-md"><i class="fa-solid fa-mug-hot"></i></span>
+                    </div>
+                    <p class="text-2xl font-bold text-white mt-2">38</p>
+                    <span class="text-xs text-neutral-400 mt-1 inline-block">All categories active</span>
+                </div>
+                <div class="bg-[#120f0d] p-5 rounded-lg border border-neutral-800 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-neutral-400">Pending Reservations</p>
+                        <span class="p-2 bg-cafeGold/10 text-cafeGold rounded-md"><i class="fa-solid fa-chair"></i></span>
+                    </div>
+                    <p class="text-2xl font-bold text-white mt-2">5</p>
+                    <span class="text-xs text-amber-400 mt-1 inline-block"><i class="fa-solid fa-clock mr-1"></i> Requires confirmation</span>
+                </div>
+            </div>
+
+            <!-- Quick Recent Activity Sub-section -->
+            <div class="bg-[#120f0d] rounded-lg border border-neutral-800 p-6">
+                <h2 class="serif-heading text-lg font-semibold text-cafeGold mb-4">Recent Live Activity</h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center justify-between py-2 border-b border-neutral-800/60">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span>New order placed: <strong>Iced Spanish Latte + Croffle</strong> (#ORD-9042)</span>
+                        </div>
+                        <span class="text-xs text-neutral-500">2 mins ago</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2 border-b border-neutral-800/60">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            <span>Table reservation request for 4 pax by Maria Santos</span>
+                        </div>
+                        <span class="text-xs text-neutral-500">14 mins ago</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                            <span>Menu item updated: <strong>Matcha Frappe</strong> (Stock marked available)</span>
+                        </div>
+                        <span class="text-xs text-neutral-500">1 hour ago</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: ORDERS MANAGEMENT -->
+        <section id="tab-content-orders" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="serif-heading text-2xl md:text-3xl font-bold text-cafeGold">Order Management</h1>
+                    <p class="text-neutral-400 text-sm">Review incoming customer orders from San Mateo patrons.</p>
+                </div>
+                <div class="flex space-x-2">
+                    <select id="order-status-filter" aria-label="Filter orders by status" class="bg-neutral-900 border border-neutral-800 text-neutral-300 text-sm rounded px-3 py-1.5 focus:outline-none focus:border-cafeGold">
+                        <option value="all">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Preparing">Preparing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="bg-[#120f0d] rounded-lg border border-neutral-800 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-neutral-900/80 text-neutral-400 border-b border-neutral-800">
+                                <th class="py-3 px-4 font-semibold">Order ID</th>
+                                <th class="py-3 px-4 font-semibold">Customer</th>
+                                <th class="py-3 px-4 font-semibold">Items</th>
+                                <th class="py-3 px-4 font-semibold">Total</th>
+                                <th class="py-3 px-4 font-semibold">Status</th>
+                                <th class="py-3 px-4 font-semibold text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-neutral-800/60">
+                            <tr>
+                                <td class="py-3.5 px-4 font-mono text-cafeGold">#ORD-9042</td>
+                                <td class="py-3.5 px-4">Juan Dela Cruz</td>
+                                <td class="py-3.5 px-4 text-neutral-300">1x Signature Kremah Latte, 1x Classic Croffle</td>
+                                <td class="py-3.5 px-4 font-medium">₱340.00</td>
+                                <td class="py-3.5 px-4"><span class="bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-full font-medium">Pending</span></td>
+                                <td class="py-3.5 px-4 text-right space-x-2">
+                                    <button type="button" data-action="update-order" data-status="Preparing" class="bg-cafeGold hover:bg-cafeGoldHover text-cafeDarker text-xs font-semibold px-2.5 py-1.5 rounded transition">Accept</button>
+                                    <button type="button" data-action="update-order" data-status="Cancelled" class="bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs px-2.5 py-1.5 rounded transition">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3.5 px-4 font-mono text-cafeGold">#ORD-9041</td>
+                                <td class="py-3.5 px-4">Ana Reyes</td>
+                                <td class="py-3.5 px-4 text-neutral-300">2x Matcha Green Tea Frappe</td>
+                                <td class="py-3.5 px-4 font-medium">₱320.00</td>
+                                <td class="py-3.5 px-4"><span class="bg-blue-500/10 text-blue-400 text-xs px-2.5 py-1 rounded-full font-medium">Preparing</span></td>
+                                <td class="py-3.5 px-4 text-right space-x-2">
+                                    <button type="button" data-action="update-order" data-status="Completed" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-2.5 py-1.5 rounded transition">Complete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3.5 px-4 font-mono text-cafeGold">#ORD-9040</td>
+                                <td class="py-3.5 px-4">Mark Villanueva</td>
+                                <td class="py-3.5 px-4 text-neutral-300">1x Cold Brew Coffee, 1x Ham & Cheese Croissant</td>
+                                <td class="py-3.5 px-4 font-medium">₱290.00</td>
+                                <td class="py-3.5 px-4"><span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-medium">Completed</span></td>
+                                <td class="py-3.5 px-4 text-right text-neutral-500 text-xs">Closed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: MENU MANAGEMENT -->
+        <section id="tab-content-menu" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="serif-heading text-2xl md:text-3xl font-bold text-cafeGold">Menu Management</h1>
+                    <p class="text-neutral-400 text-sm">Add, edit, or adjust availability of handcrafted cafe items.</p>
+                </div>
+                <button type="button" data-action="add-item" class="bg-cafeGold hover:bg-cafeGoldHover text-cafeDarker font-semibold px-4 py-2 rounded text-sm transition flex items-center space-x-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add New Item</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Sample Menu Card 1 -->
+                <div data-menu-card class="bg-[#120f0d] border border-neutral-800 rounded-lg overflow-hidden flex flex-col justify-between">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <span data-menu-category class="text-xs bg-neutral-800 text-cafeGold px-2 py-0.5 rounded font-mono">Specialty Coffee</span>
+                            <span data-menu-status class="text-emerald-400 text-xs"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Available</span>
+                        </div>
+                        <h3 class="serif-heading text-lg font-bold text-white">Signature Kremah Latte</h3>
+                        <p class="text-neutral-400 text-sm mt-1">Rich espresso mixed with creamy velvety sweet milk blend.</p>
+                        <p class="text-cafeGold font-semibold mt-3">₱160.00</p>
+                    </div>
+                    <div class="bg-neutral-900/80 px-5 py-3 border-t border-neutral-800 flex justify-end space-x-2">
+                        <button type="button" data-action="edit-item" class="text-xs text-neutral-300 hover:text-cafeGold px-3 py-1 bg-neutral-800 rounded transition">Edit</button>
+                        <button type="button" data-action="toggle-item" class="text-xs text-amber-400 hover:text-amber-300 px-3 py-1 bg-neutral-800 rounded transition">Mark Unavailable</button>
+                    </div>
+                </div>
+
+                <!-- Sample Menu Card 2 -->
+                <div data-menu-card class="bg-[#120f0d] border border-neutral-800 rounded-lg overflow-hidden flex flex-col justify-between">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <span data-menu-category class="text-xs bg-neutral-800 text-cafeGold px-2 py-0.5 rounded font-mono">Croffles</span>
+                            <span data-menu-status class="text-emerald-400 text-xs"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Available</span>
+                        </div>
+                        <h3 class="serif-heading text-lg font-bold text-white">Classic Butter Croffle</h3>
+                        <p class="text-neutral-400 text-sm mt-1">Flaky croissant dough pressed to perfection, drizzled with honey.</p>
+                        <p class="text-cafeGold font-semibold mt-3">₱140.00</p>
+                    </div>
+                    <div class="bg-neutral-900/80 px-5 py-3 border-t border-neutral-800 flex justify-end space-x-2">
+                        <button type="button" data-action="edit-item" class="text-xs text-neutral-300 hover:text-cafeGold px-3 py-1 bg-neutral-800 rounded transition">Edit</button>
+                        <button type="button" data-action="toggle-item" class="text-xs text-amber-400 hover:text-amber-300 px-3 py-1 bg-neutral-800 rounded transition">Mark Unavailable</button>
+                    </div>
+                </div>
+
+                <!-- Sample Menu Card 3 -->
+                <div data-menu-card class="bg-[#120f0d] border border-neutral-800 rounded-lg overflow-hidden flex flex-col justify-between">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <span data-menu-category class="text-xs bg-neutral-800 text-cafeGold px-2 py-0.5 rounded font-mono">Matcha Drinks</span>
+                            <span data-menu-status class="text-amber-400 text-xs"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Sold Out</span>
+                        </div>
+                        <h3 class="serif-heading text-lg font-bold text-white">Matcha Green Tea Frappe</h3>
+                        <p class="text-neutral-400 text-sm mt-1">Premium ceremonial grade matcha blended with milk and ice.</p>
+                        <p class="text-cafeGold font-semibold mt-3">₱180.00</p>
+                    </div>
+                    <div class="bg-neutral-900/80 px-5 py-3 border-t border-neutral-800 flex justify-end space-x-2">
+                        <button type="button" data-action="edit-item" class="text-xs text-neutral-300 hover:text-cafeGold px-3 py-1 bg-neutral-800 rounded transition">Edit</button>
+                        <button type="button" data-action="toggle-item" class="text-xs text-emerald-400 hover:text-emerald-300 px-3 py-1 bg-neutral-800 rounded transition">Mark Available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: USERS MANAGEMENT -->
+        <section id="tab-content-users" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="serif-heading text-2xl md:text-3xl font-bold text-cafeGold">User & Role Management</h1>
+                    <p class="text-neutral-400 text-sm">Manage staff and administrative access permissions.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#120f0d] rounded-lg border border-neutral-800 overflow-hidden">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-neutral-900/80 text-neutral-400 border-b border-neutral-800">
+                            <th class="py-3 px-4 font-semibold">Username</th>
+                            <th class="py-3 px-4 font-semibold">Email</th>
+                            <th class="py-3 px-4 font-semibold">Role</th>
+                            <th class="py-3 px-4 font-semibold">Status</th>
+                            <th class="py-3 px-4 font-semibold text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-800/60">
+                        <tr>
+                            <td class="py-3.5 px-4 font-medium text-white">zyruz0802</td>
+                            <td class="py-3.5 px-4 text-neutral-400">admin@kremahcafe.com</td>
+                            <td class="py-3.5 px-4"><span class="bg-cafeGold/10 text-cafeGold text-xs px-2 py-0.5 rounded font-mono">Administrator</span></td>
+                            <td class="py-3.5 px-4"><span class="text-emerald-400 text-xs">Active</span></td>
+                            <td class="py-3.5 px-4 text-right">
+                                <span class="text-xs text-neutral-500">Superuser</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 px-4 font-medium text-white">barista_sanmateo</td>
+                            <td class="py-3.5 px-4 text-neutral-400">staff@kremahcafe.com</td>
+                            <td class="py-3.5 px-4"><span class="bg-neutral-800 text-neutral-300 text-xs px-2 py-0.5 rounded font-mono">Staff / Barista</span></td>
+                            <td class="py-3.5 px-4"><span class="text-emerald-400 text-xs">Active</span></td>
+                            <td class="py-3.5 px-4 text-right">
+                                <span class="text-xs text-neutral-500">Demo account</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <dialog id="menu-item-dialog" class="w-full max-w-lg rounded-lg border border-neutral-700 bg-[#120f0d] p-0 text-neutral-100 backdrop:bg-black/70">
+            <form id="menu-item-form" class="space-y-4 p-6">
+                <h2 id="menu-item-dialog-title" class="serif-heading text-xl font-bold text-cafeGold">Add menu item</h2>
+                <p id="menu-item-error" class="hidden text-sm text-red-300" role="alert"></p>
+                <label class="block space-y-1 text-sm text-neutral-300">
+                    Item name
+                    <input id="menu-item-name" name="name" required maxlength="120" class="w-full rounded border border-neutral-700 bg-neutral-900 px-3 py-2 text-white">
+                </label>
+                <label class="block space-y-1 text-sm text-neutral-300">
+                    Category
+                    <input id="menu-item-category" name="category" required maxlength="80" class="w-full rounded border border-neutral-700 bg-neutral-900 px-3 py-2 text-white">
+                </label>
+                <label class="block space-y-1 text-sm text-neutral-300">
+                    Description
+                    <textarea id="menu-item-description" name="description" rows="3" maxlength="500" class="w-full rounded border border-neutral-700 bg-neutral-900 px-3 py-2 text-white"></textarea>
+                </label>
+                <label class="block space-y-1 text-sm text-neutral-300">
+                    Price (₱)
+                    <input id="menu-item-price" name="price" type="number" min="0" step="0.01" required class="w-full rounded border border-neutral-700 bg-neutral-900 px-3 py-2 text-white">
+                </label>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" data-action="close-modal" class="rounded bg-neutral-800 px-4 py-2 text-sm text-neutral-200 hover:bg-neutral-700">Cancel</button>
+                    <button id="menu-item-submit" type="submit" class="rounded bg-cafeGold px-4 py-2 text-sm font-semibold text-cafeDarker hover:bg-cafeGoldHover">Add item</button>
+                </div>
+            </form>
+        </dialog>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cafeDarker border-t border-neutral-800 py-6 text-center text-xs text-neutral-500 mt-auto">
+        <p>© 2026 Kremah Café. All rights reserved. San Mateo, Rizal Admin Panel.</p>
+    </footer>
+
+    <!-- Interactive JS logic -->
+    <script src="./script.js" defer></script>
+
+</body>
+</html>
